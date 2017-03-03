@@ -10,6 +10,7 @@ public class Comment implements Serializable{
 
     private Long id;
     private Long parentId;
+    private String title;
     private String comment;
     private String reply;
     private Integer top;
@@ -43,6 +44,14 @@ public class Comment implements Serializable{
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getComment() {

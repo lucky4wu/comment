@@ -13,7 +13,8 @@ import java.util.List;
 /**
  * Created by CrazyFive on 2017/2/28.
  */
-@RestController("comment")
+@RestController
+@RequestMapping("/comment")
 public class CommentController {
 
     @ResponseBody
