@@ -1,25 +1,28 @@
 package accew.comment.web;
 
 import accew.comment.model.Comment;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.json.JSONML;
+import org.json.JSONObject;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 /**
  * Created by CrazyFive on 2017/2/28.
  */
-@RestController
+@Controller
 @RequestMapping("/comment")
 public class CommentController {
 
     @ResponseBody
-    @RequestMapping(value = "listPage", method = RequestMethod.GET)
-    public List<Comment> listPage(){
+    @RequestMapping(value = "/listPage", method = RequestMethod.GET)
+    public String listPage(HttpServletRequest request, Model model){
         List<Comment> commentList = new ArrayList<Comment>();
         for (int i=0;i<10; i++){
             Comment comment = new Comment();
@@ -28,11 +31,12 @@ public class CommentController {
             comment.setCreateTime(Calendar.getInstance().getTime());
             commentList.add(comment);
         }
-        return commentList;
+        return JSONObject.valueToString(commentList);
     }
 
-    @RequestMapping(value = "list")
-    public String list(){
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list(HttpServletRequest request, Model model){
+
         return "/comment/list";
     }
 }
