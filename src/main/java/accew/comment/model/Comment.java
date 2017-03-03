@@ -1,34 +1,51 @@
 package accew.comment.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by CrazyFive on 2017/2/28.
- */
-public class Comment implements Serializable{
-
+public class Comment {
     private Long id;
+
     private Long parentId;
+
     private String title;
+
     private String comment;
+
     private String reply;
+
     private Integer top;
+
     private Integer step;
+
     private Integer collect;
+
     private String isReport;
+
     private String reportReason;
+
     private String reportType;
+
     private String type;
-    private String remark;
+
     private String status;
+
     private String yn;
+
     private String checkUser;
+
     private Date checkTime;
+
     private String createUser;
+
     private Date createTime;
+
     private String updateUser;
+
     private Date ts;
+
+    private Integer versions;
+
+    private String remark;
 
     public Long getId() {
         return id;
@@ -51,7 +68,7 @@ public class Comment implements Serializable{
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title == null ? null : title.trim();
     }
 
     public String getComment() {
@@ -59,7 +76,7 @@ public class Comment implements Serializable{
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
+        this.comment = comment == null ? null : comment.trim();
     }
 
     public String getReply() {
@@ -67,7 +84,7 @@ public class Comment implements Serializable{
     }
 
     public void setReply(String reply) {
-        this.reply = reply;
+        this.reply = reply == null ? null : reply.trim();
     }
 
     public Integer getTop() {
@@ -99,7 +116,7 @@ public class Comment implements Serializable{
     }
 
     public void setIsReport(String isReport) {
-        this.isReport = isReport;
+        this.isReport = isReport == null ? null : isReport.trim();
     }
 
     public String getReportReason() {
@@ -107,7 +124,7 @@ public class Comment implements Serializable{
     }
 
     public void setReportReason(String reportReason) {
-        this.reportReason = reportReason;
+        this.reportReason = reportReason == null ? null : reportReason.trim();
     }
 
     public String getReportType() {
@@ -115,7 +132,7 @@ public class Comment implements Serializable{
     }
 
     public void setReportType(String reportType) {
-        this.reportType = reportType;
+        this.reportType = reportType == null ? null : reportType.trim();
     }
 
     public String getType() {
@@ -123,15 +140,7 @@ public class Comment implements Serializable{
     }
 
     public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
+        this.type = type == null ? null : type.trim();
     }
 
     public String getStatus() {
@@ -139,7 +148,7 @@ public class Comment implements Serializable{
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.status = status == null ? null : status.trim();
     }
 
     public String getYn() {
@@ -147,7 +156,7 @@ public class Comment implements Serializable{
     }
 
     public void setYn(String yn) {
-        this.yn = yn;
+        this.yn = yn == null ? null : yn.trim();
     }
 
     public String getCheckUser() {
@@ -155,7 +164,7 @@ public class Comment implements Serializable{
     }
 
     public void setCheckUser(String checkUser) {
-        this.checkUser = checkUser;
+        this.checkUser = checkUser == null ? null : checkUser.trim();
     }
 
     public Date getCheckTime() {
@@ -171,7 +180,7 @@ public class Comment implements Serializable{
     }
 
     public void setCreateUser(String createUser) {
-        this.createUser = createUser;
+        this.createUser = createUser == null ? null : createUser.trim();
     }
 
     public Date getCreateTime() {
@@ -187,7 +196,7 @@ public class Comment implements Serializable{
     }
 
     public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser;
+        this.updateUser = updateUser == null ? null : updateUser.trim();
     }
 
     public Date getTs() {
@@ -196,5 +205,21 @@ public class Comment implements Serializable{
 
     public void setTs(Date ts) {
         this.ts = ts;
+    }
+
+    public Integer getVersions() {
+        return versions;
+    }
+
+    public void setVersions(Integer versions) {
+        this.versions = versions;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 }

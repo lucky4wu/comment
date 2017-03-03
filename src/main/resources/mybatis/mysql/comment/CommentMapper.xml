@@ -1,5 +1,396 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="accew.comment.dao.CommentDao">
+  <resultMap id="BaseResultMap" type="accew.comment.model.Comment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="reply" jdbcType="VARCHAR" property="reply" />
+    <result column="top" jdbcType="INTEGER" property="top" />
+    <result column="step" jdbcType="INTEGER" property="step" />
+    <result column="collect" jdbcType="INTEGER" property="collect" />
+    <result column="is_report" jdbcType="VARCHAR" property="isReport" />
+    <result column="report_reason" jdbcType="VARCHAR" property="reportReason" />
+    <result column="report_type" jdbcType="VARCHAR" property="reportType" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="yn" jdbcType="VARCHAR" property="yn" />
+    <result column="check_user" jdbcType="VARCHAR" property="checkUser" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="ts" jdbcType="TIMESTAMP" property="ts" />
+    <result column="versions" jdbcType="INTEGER" property="versions" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="accew.comment.model.Comment">
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, parent_id, title, comment, reply, top, step, collect, is_report, report_reason, 
+    report_type, type, status, yn, check_user, check_time, create_user, create_time, 
+    update_user, ts, versions
+  </sql>
+  <sql id="Blob_Column_List">
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="accew.comment.model.Comment">
+    insert into comment (id, parent_id, title, 
+      comment, reply, top, 
+      step, collect, is_report, 
+      report_reason, report_type, type, 
+      status, yn, check_user, 
+      check_time, create_user, create_time, 
+      update_user, ts, versions, 
+      remark)
+    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{comment,jdbcType=VARCHAR}, #{reply,jdbcType=VARCHAR}, #{top,jdbcType=INTEGER}, 
+      #{step,jdbcType=INTEGER}, #{collect,jdbcType=INTEGER}, #{isReport,jdbcType=VARCHAR}, 
+      #{reportReason,jdbcType=VARCHAR}, #{reportType,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{yn,jdbcType=VARCHAR}, #{checkUser,jdbcType=VARCHAR}, 
+      #{checkTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR}, #{ts,jdbcType=TIMESTAMP}, #{versions,jdbcType=INTEGER}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="accew.comment.model.Comment">
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="reply != null">
+        reply,
+      </if>
+      <if test="top != null">
+        top,
+      </if>
+      <if test="step != null">
+        step,
+      </if>
+      <if test="collect != null">
+        collect,
+      </if>
+      <if test="isReport != null">
+        is_report,
+      </if>
+      <if test="reportReason != null">
+        report_reason,
+      </if>
+      <if test="reportType != null">
+        report_type,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="yn != null">
+        yn,
+      </if>
+      <if test="checkUser != null">
+        check_user,
+      </if>
+      <if test="checkTime != null">
+        check_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="ts != null">
+        ts,
+      </if>
+      <if test="versions != null">
+        versions,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="reply != null">
+        #{reply,jdbcType=VARCHAR},
+      </if>
+      <if test="top != null">
+        #{top,jdbcType=INTEGER},
+      </if>
+      <if test="step != null">
+        #{step,jdbcType=INTEGER},
+      </if>
+      <if test="collect != null">
+        #{collect,jdbcType=INTEGER},
+      </if>
+      <if test="isReport != null">
+        #{isReport,jdbcType=VARCHAR},
+      </if>
+      <if test="reportReason != null">
+        #{reportReason,jdbcType=VARCHAR},
+      </if>
+      <if test="reportType != null">
+        #{reportType,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="yn != null">
+        #{yn,jdbcType=VARCHAR},
+      </if>
+      <if test="checkUser != null">
+        #{checkUser,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versions != null">
+        #{versions,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="accew.comment.model.Comment">
+    update comment
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="reply != null">
+        reply = #{reply,jdbcType=VARCHAR},
+      </if>
+      <if test="top != null">
+        top = #{top,jdbcType=INTEGER},
+      </if>
+      <if test="step != null">
+        step = #{step,jdbcType=INTEGER},
+      </if>
+      <if test="collect != null">
+        collect = #{collect,jdbcType=INTEGER},
+      </if>
+      <if test="isReport != null">
+        is_report = #{isReport,jdbcType=VARCHAR},
+      </if>
+      <if test="reportReason != null">
+        report_reason = #{reportReason,jdbcType=VARCHAR},
+      </if>
+      <if test="reportType != null">
+        report_type = #{reportType,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="yn != null">
+        yn = #{yn,jdbcType=VARCHAR},
+      </if>
+      <if test="checkUser != null">
+        check_user = #{checkUser,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        check_time = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versions != null">
+        versions = #{versions,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="accew.comment.model.Comment">
+    update comment
+    set parent_id = #{parentId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      reply = #{reply,jdbcType=VARCHAR},
+      top = #{top,jdbcType=INTEGER},
+      step = #{step,jdbcType=INTEGER},
+      collect = #{collect,jdbcType=INTEGER},
+      is_report = #{isReport,jdbcType=VARCHAR},
+      report_reason = #{reportReason,jdbcType=VARCHAR},
+      report_type = #{reportType,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      yn = #{yn,jdbcType=VARCHAR},
+      check_user = #{checkUser,jdbcType=VARCHAR},
+      check_time = #{checkTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      ts = #{ts,jdbcType=TIMESTAMP},
+      versions = #{versions,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="accew.comment.model.Comment">
+    update comment
+    set parent_id = #{parentId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      reply = #{reply,jdbcType=VARCHAR},
+      top = #{top,jdbcType=INTEGER},
+      step = #{step,jdbcType=INTEGER},
+      collect = #{collect,jdbcType=INTEGER},
+      is_report = #{isReport,jdbcType=VARCHAR},
+      report_reason = #{reportReason,jdbcType=VARCHAR},
+      report_type = #{reportType,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      yn = #{yn,jdbcType=VARCHAR},
+      check_user = #{checkUser,jdbcType=VARCHAR},
+      check_time = #{checkTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      ts = #{ts,jdbcType=TIMESTAMP},
+      versions = #{versions,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="queryForList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    SELECT * FROM (
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM comment
+    WHERE Yn = 'Y'
+    <include refid="pageQueryCondition"/>
+    order by create_time desc
+    ) F
+    <if test="orderby != null and orderby != '' ">
+      order by #{orderby,jdbcType=VARCHAR}
+    </if>
+    limit #{startRow}, #{pageSize}
+  </select>
+
+  <select id="queryForCount" parameterType="java.util.HashMap" resultType="java.lang.Long">
+    SELECT Count(id)
+    FROM comment
+    WHERE Yn = 'Y'
+    <include refid="pageQueryCondition"/>
+  </select>
+
+  <sql id="queryCondition">
+    <if test="id != null and id != '' ">
+      and id = #{id,jdbcType=BIGINT}
+    </if>
+    <if test="title != null and title != '' ">
+      and title like CONCAT('%', #{title,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="comment != null and comment != '' ">
+      and comment like CONCAT('%', #{comment,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="type != null and type != '' ">
+      and type = #{type,jdbcType=VARCHAR}
+    </if>
+    <if test="yn != null and yn != '' ">
+      and yn = #{yn,jdbcType=VARCHAR}
+    </if>
+    <if test="status != null and status != '' ">
+      and status = #{status,jdbcType=VARCHAR}
+    </if>
+    <if test="createUser != null and createUser != '' ">
+      and create_user = #{createUser,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <sql id="pageQueryCondition">
+    <if test="id != null and id != '' ">
+      and id = #{id,jdbcType=BIGINT}
+    </if>
+    <if test="title != null and title != '' ">
+      and title like CONCAT('%', #{title,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="comment != null and comment != '' ">
+      and comment like CONCAT('%', #{comment,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="type != null and type != '' ">
+      and type = #{type,jdbcType=VARCHAR}
+    </if>
+    <if test="yn != null and yn != '' ">
+      and yn = #{yn,jdbcType=VARCHAR}
+    </if>
+    <if test="status != null and status != '' ">
+      and status = #{status,jdbcType=VARCHAR}
+    </if>
+    <if test="createUser != null and createUser != '' ">
+      and create_user = #{createUser,jdbcType=VARCHAR}
+    </if>
+  </sql>
 
 </mapper>

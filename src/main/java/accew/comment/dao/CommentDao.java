@@ -9,4 +9,6 @@ import accew.comment.modules.mybatis.MyBatisDao;
  */
 @MyBatisDao
 public interface CommentDao extends BaseMyBatisDao<Comment, Long>{
+
 }
+
