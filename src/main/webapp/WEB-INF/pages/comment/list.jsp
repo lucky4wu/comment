@@ -3,8 +3,10 @@
 <html>
 <head>
     <title></title>
+    <meta http-equiv="refresh" content="1; url=${ctx}/index.jsp">
 </head>
 <body>
-<p>我的留言</p>
+<p>留言成功！天了噜！</p>
+
 </body>
 </html>

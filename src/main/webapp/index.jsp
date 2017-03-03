@@ -39,21 +39,22 @@
 
 
 </form>
-<script type="text/javascript" src="static/js/jquery-migrate-1.4.1.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/jquery-1.4.3.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
+   $(function(){
         var html = "";
-        html += "<tr><th style='width: 500px;'>标题</th><th>用户</th><th>时间</th></tr>";
-        $.ajax({ url: "http://localhost:9193/comment/listPage",
+        html += "<tr><th style='width: 200px;'>标题</th><th style='width: 500px;'>内容</th><th>用户</th><th>时间</th></tr>";
+        $.ajax({ url: "${ctx}/comment/listPage",
             type:"get",
             async:false,
             dataType:"json",
             success: function(data){
                 $.each(data, function (i, item) {
                     html += "<tr>";
-                    html += "<td>" + item[i].title + "</td>";
-                    html += "<td>" + item[i].createUser + "</td>";
-                    html += "<td>" + item[i].createTime + "</td>";
+                    html += "<td>" + item.title + "</td>";
+                    html += "<td>" + item.comment + "</td>";
+                    html += "<td>" + item.createUser + "</td>";
+                    html += "<td>" + item.createTime + "</td>";
                     html += "</tr>";
                 });
 
@@ -62,15 +63,22 @@
         });
     });
 
+   var checkflag = {"title":false, "comment":false};
+   $("#txtTitle").blur(function () {
+       if ($("#txtTitle").val() == ""){
+            checkflag.title = false;
+       }
+   });
+
+   $("#txtComment").blur(function () {
+       if ($("#txtComment").val() == ""){
+           checkflag.comment = false;
+       }
+   });
     $("#addForm").submit(function () {
-        var flag = true;
-        if ($("#txtTitle").val() == "" ){
-            flag = false;
-        }
-        if ($("#txtComment").val() == ""){
-            flag = false;
-        }
-        return  flag;
+        $("#txtTitle").blur();
+        $("#txtComment").blur();
+        return  checkflag.title && checkflag.comment;
     });
 </script>
 </body>

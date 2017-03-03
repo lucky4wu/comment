@@ -40,7 +40,7 @@ public class CommentController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(HttpServletRequest request, Model model){
 
-        return "/comment/list";
+        return "../../index";
     }
 
     @RequestMapping(value = "/addComment", method = RequestMethod.POST)
@@ -76,6 +76,6 @@ public class CommentController {
         }
 
         commentService.addComment(comment);
-        return "../../index";
+        return "/comment/list";
     }
 }
