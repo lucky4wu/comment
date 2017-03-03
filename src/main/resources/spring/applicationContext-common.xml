@@ -15,6 +15,7 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd"
        default-lazy-init="true">
 
+    <!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
     <context:component-scan base-package="accew">
         <context:exclude-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller" />
@@ -68,5 +69,17 @@
         </property>
     </bean>
 
+    <!--扫描basePackage下所有以@MyBatisDao标识的 接口 -->
+    <!-- 主档数据数据库. -->
+    <bean id="mapperScannerConfigurerMain" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="accew" />
+        <property name="annotationClass" value="accew.modules.mybatis.MyBatisDao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+        <constructor-arg index="1" value="REUSE" />
+    </bean>
 
 </beans>

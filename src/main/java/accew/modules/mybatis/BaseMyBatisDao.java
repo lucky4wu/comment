@@ -1,4 +1,4 @@
-package accew.comment.modules.mybatis;
+package accew.modules.mybatis;
 
 import java.io.Serializable;
 import java.util.List;

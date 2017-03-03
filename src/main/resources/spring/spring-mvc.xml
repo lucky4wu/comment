@@ -6,13 +6,15 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <mvc:annotation-driven enable-matrix-variables="true" />
+
     <!-- 自动扫描且只扫描@Controller -->
     <context:component-scan base-package="accew"
                             use-default-filters="false">
         <context:include-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
-    <mvc:annotation-driven enable-matrix-variables="true" />
+
     <!-- 支持以斜杠结尾的url begin -->
     <mvc:default-servlet-handler />
 

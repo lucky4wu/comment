@@ -2,11 +2,11 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeHandlers>
-		<typeHandler handler="com.atlas.handler.StringTypeHandler" javaType="String" jdbcType="VARCHAR"/> 
+		<typeHandler handler="accew.handler.StringTypeHandler" javaType="String" jdbcType="VARCHAR"/>
 	</typeHandlers>
 	
 	<plugins>
-		<plugin interceptor="com.atlas.common.service.UpdateFilterPlugin">
+		<plugin interceptor="accew.common.UpdateFilterPlugin">
 			<!-- value 必须是大写表名 -->
 		</plugin>
 	</plugins>
