@@ -34,6 +34,7 @@ public class CommentController {
     @RequestMapping(value = "/listPage", method = RequestMethod.GET)
     public String listPage(HttpServletRequest request, Model model){
         List<Comment> commentList = commentService.queryPage();
+
         return JSONObject.valueToString(commentList);
     }
 

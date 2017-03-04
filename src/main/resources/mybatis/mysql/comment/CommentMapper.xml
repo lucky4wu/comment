@@ -332,6 +332,7 @@
     <include refid="pageQueryCondition"/>
     order by create_time desc
     ) F
+    limit 200
   </select>
 
   <select id="queryForList" parameterType="java.util.HashMap" resultType="java.util.HashMap">

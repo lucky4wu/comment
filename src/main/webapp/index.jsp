@@ -39,14 +39,14 @@
 
 
 </form>
-<script type="text/javascript" src="${ctx}/static/js/jquery-1.4.3.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" src="${ctx}/static/js/jquery-1.4.3.js" ></script>
+<script type="text/javascript" >
    $(function(){
         var html = "";
         html += "<tr><th style='width: 200px;'>标题</th><th style='width: 500px;'>内容</th><th>用户</th><th>时间</th></tr>";
         $.ajax({ url: "${ctx}/comment/listPage",
             type:"get",
-            async:false,
+            async:true,
             dataType:"json",
             success: function(data){
                 $.each(data, function (i, item) {
@@ -67,12 +67,16 @@
    $("#txtTitle").blur(function () {
        if ($("#txtTitle").val() == ""){
             checkflag.title = false;
+       }else {
+           checkflag.title = true;
        }
    });
 
    $("#txtComment").blur(function () {
        if ($("#txtComment").val() == ""){
            checkflag.comment = false;
+       }else {
+           checkflag.comment = true;
        }
    });
     $("#addForm").submit(function () {
