@@ -39,11 +39,9 @@
 <div>
     <p>请愉快的向穷苦的开发者捐款加快施工进度</p>
     <p><em>一分钱也是爱</em></p>
-    <img src="${ctx}/static/image/weixin.jpg" alt="" style="height: 200px;width: 160px;"/>
-    <img src="${ctx}/static/image/zhifubao.jpg" alt="" style="height: 200px;width: 160px;"/>
+    <img src="${ctx}/static/image/zhifubao.jpg" alt="" style="height: 480px;width: 320px;"/>
     <p><em>更多的爱</em></p>
-    <img src="${ctx}/static/image/weixin-2.jpg" alt="" style="height: 200px;width: 160px;"/>
-    <img src="${ctx}/static/image/zhifubao-2.jpg" alt="" style="height: 200px;width: 160px;"/>
+    <img src="${ctx}/static/image/zhifubao-2.jpg" alt="" style="height: 480px;width: 320px;"/>
 </div>
 
 </form>
