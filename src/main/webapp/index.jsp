@@ -10,42 +10,78 @@
 <html>
 <head>
     <title>匿名版</title>
+    <jsp:include page="${ctx}/WEB-INF/pages/common/baseUI.jsp" />
 </head>
 <body>
-<p>Acc's 匿名版，欢迎灌水！</p>
-<table id="ajaxListPage"></table>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="navbar-text">Acc's 匿名版，欢迎灌水！</p>
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group" >
+                        <input type="text" name="comment" class="form-control" id="searchTitle" placeholder="搜索..."/>
+                        <button type="button" class="btn btn-default" style="border-color: #ffffff;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover" id="ajaxListPage" style="margin-top: 60px;">
 
-<form action="/comment/addComment" id="addForm" method="post">
-    <table>
-        <tr>
-            <th>标题</th>
-            <td>
-                <input name="title" id="txtTitle" />
-            </td>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <form class="form-horizontal"  action="/comment/addComment" id="addForm" method="post">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">标题</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="title" class="form-control" id="txtTitle" placeholde="请输入标题"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">内容</label>
+                    <div class="col-sm-10">
+                        <textarea type="text" name="comment" class="form-control" id="txtComment" placeholde="请输入内容" style="height: 180px;"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary" style="width: 100px;">提交</button>
+                    </div>
+                </div>
 
-        </tr>
-        <tr>
-            <th>内容</th>
-            <td>
-                <textarea name="comment" id="txtComment" style="width: 700px;height: 200px;"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="提交" style="height: 45px;width: 120px;color: dodgerblue"/>
-            </td>
-        </tr>
-    </table>
-<div>
-    <p>请愉快的向穷苦的开发者捐款加快施工进度</p>
-    <p><em>一分钱也是爱</em></p>
-    <img src="${ctx}/static/image/zhifubao.jpg" alt="" style="height: 480px;width: 320px;"/>
-    <p><em>更多的爱</em></p>
-    <img src="${ctx}/static/image/zhifubao-2.jpg" alt="" style="height: 480px;width: 320px;"/>
+            </form>
+        </div>
+        <div class="col-md-2">
+            <table class="table">
+                <tr>
+                    <th>昵称</th>
+                    <td>${user.nickName}</td>
+                </tr>
+                <tr>
+                    <img src="${ctx}/static/image/${user.imageUrl}" class="img-responsive img-circle" alt="头像" style="height: 140px;width: 140px;">
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <img src="${ctx}/static/image/zhifubao.jpg" class="img-responsive" alt="支付二维码" title="一分钱也是爱" style="height: 480px;width: 320px;">
+        </div>
+        <div class="col-md-12">
+            <img src="${ctx}/static/image/zhifubao-2.jpg" class="img-responsive" alt="支付二维码" title="捐助开发者团队" style="height: 480px;width: 320px;">
+        </div>
+    </div>
 </div>
 
-</form>
-<script type="text/javascript" src="${ctx}/static/js/jquery-1.4.3.js" ></script>
+
 <script type="text/javascript" >
    $(function(){
         var html = "";
