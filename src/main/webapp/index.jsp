@@ -37,18 +37,21 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-12">
+            <h3>路过留下 <span class="label label-info">爪印</span></h3>
+        </div>
         <div class="col-md-10">
             <form class="form-horizontal"  action="/comment/addComment" id="addForm" method="post">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">标题</label>
                     <div class="col-sm-10">
-                        <input type="text" name="title" class="form-control" id="txtTitle" placeholde="请输入标题"/>
+                        <input type="text" name="title" class="form-control" id="txtTitle" placeholder="请输入标题"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">内容</label>
                     <div class="col-sm-10">
-                        <textarea type="text" name="comment" class="form-control" id="txtComment" placeholde="请输入内容" style="height: 180px;"></textarea>
+                        <textarea type="text" name="comment" class="form-control" id="txtComment" placeholder="请输入内容" style="height: 180px;"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -69,6 +72,15 @@
                     <img src="${ctx}/static/image/${user.imageUrl}" class="img-responsive img-circle" alt="头像" style="height: 140px;width: 140px;">
                 </tr>
             </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 15%">
+                    正在施工
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
