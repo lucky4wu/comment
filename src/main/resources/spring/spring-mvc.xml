@@ -6,8 +6,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <mvc:annotation-driven enable-matrix-variables="true" />
-
     <!-- 自动扫描且只扫描@Controller -->
     <context:component-scan base-package="accew"
                             use-default-filters="false">
@@ -15,10 +13,23 @@
                                 expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <array>
+                <bean class="accew.modules.converter.StringConverter" />
+                <bean class="accew.modules.converter.DateConverter" />
+            </array>
+        </property>
+    </bean>
+
+    <mvc:annotation-driven conversion-service="conversionService" enable-matrix-variables="true">
+        <mvc:message-converters>
+            <bean class="accew.modules.converter.MyStringHttpMessageConverter" />
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
     <!-- 支持以斜杠结尾的url begin -->
     <mvc:default-servlet-handler />
-
-
 
     <bean id="jspViewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -29,6 +40,12 @@
             <value>.jsp</value>
         </property>
         <property name="order" value="2" />
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="maxUploadSize" value="104857600" />
+        <property name="maxInMemorySize" value="4096" />
     </bean>
 
 </beans>
