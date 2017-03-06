@@ -19,7 +19,7 @@
             <div class="col-md-12">
                 <p class="navbar-text">Acc's 匿名版，欢迎灌水！</p>
                 <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group" >
+                    <div class="form-group " >
                         <input type="text" name="comment" class="form-control" id="searchTitle" placeholder="搜索..."/>
                         <button type="button" class="btn btn-default" style="border-color: #ffffff;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </div>
@@ -31,7 +31,19 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover" id="ajaxListPage" style="margin-top: 60px;">
+            <p class="navbar-text">Acc's 匿名版，欢迎灌水！</p>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group " >
+                    <input type="text" name="comment" class="form-control" id="searchTitle" placeholder="搜索..."/>
+                    <button type="button" class="btn btn-default" style="border-color: #ffffff;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" >
+            <h3>  </h3>
+            <table class="table table-hover" id="ajaxListPage" >
 
             </table>
         </div>
