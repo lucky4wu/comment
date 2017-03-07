@@ -54,6 +54,7 @@ public class CommentService {
 
     public List<Comment> queryPage() {
         Comment comment = new Comment();
+        comment.setType("03");
         return commentDao.selectList(comment);
     }
 

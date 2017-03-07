@@ -41,18 +41,23 @@ public class CommentController extends BaseController{
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(HttpServletRequest request, Model model){
+    public String list(HttpServletRequest request, HttpServletResponse response, Model model){
+        String userNo = getUserNo(request, response);
 
+        model.addAttribute("userNo", userNo);
         return "../../index";
     }
 
     @RequestMapping(value = "/addComment", method = RequestMethod.POST)
-    public String addComment(Comment comment, HttpServletRequest request, HttpServletResponse response){
+    public String addComment(Comment comment, HttpServletRequest request, HttpServletResponse response, Model model){
         String userNo = getUserNo(request, response);
         comment.setCreateUser(userNo);
 
         commentService.addComment(comment);
-        return "/comment/list";
+
+        model.addAttribute("userNo", userNo);
+
+        return "../../index";
     }
 
     @ResponseBody
