@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>匿名版</title>
-    <jsp:include page="${ctx}/WEB-INF/pages/common/baseUI.jsp" />
+    <jsp:include page="${ctx}/WEB-INF/pages/common/baseui.jsp" />
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -31,7 +31,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <p class="navbar-text">Acc's 匿名版，欢迎灌水！</p>
+            <p class="navbar-text"></p>
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group " >
                     <input type="text" name="comment" class="form-control"  placeholder="搜索..."/>
@@ -93,7 +93,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="progress">
-                <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
                     正在施工
                 </div>
             </div>
@@ -113,7 +113,7 @@
 <script type="text/javascript" >
    $(function(){
         var html = "";
-        html += "<tr><th style='width: 200px;'>标题</th><th style='width: 500px;'>内容</th><th>用户</th><th>时间</th></tr>";
+        html += "<tr><th class='col-md-10'></th><th class='col-md-2'></th></tr>";
         $.ajax({ url: "${ctx}/comment/listPage",
             type:"get",
             async:true,
@@ -121,10 +121,9 @@
             success: function(data){
                 $.each(data, function (i, item) {
                     html += "<tr>";
-                    html += "<td>" + item.title + "</td>";
-                    html += "<td>" + item.comment + "</td>";
-                    html += "<td>" + item.createUser + "</td>";
-                    html += "<td>" + item.createTime + "</td>";
+                    html += "<td><a href='${ctx}/comment/contentList/"+ item.id + "' target='_blank' >" + item.title + "</a></td>";
+                    html += "<td><h5><small>" + item.createUser + "</small></h5>";
+                    html += "<h6><small>" + date2str(item.createTime) + "</small></h6></td>";
                     html += "</tr>";
                 });
 
@@ -132,6 +131,10 @@
             }
         });
     });
+
+   function date2str(date) {
+       return date.substr(0,20)
+   }
 
    var checkflag = {"title":false, "comment":false};
    $("#txtTitle").blur(function () {
@@ -155,5 +158,6 @@
         return  checkflag.title && checkflag.comment;
     });
 </script>
+<jsp:include page="${ctx}/WEB-INF/pages/common/footer.jsp" />
 </body>
 </html>

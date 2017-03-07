@@ -53,9 +53,8 @@ public class CommentController extends BaseController{
         return "../../index";
     }
 
-    @ResponseBody
     @RequestMapping(value = "/replyContent/{id}", method = RequestMethod.POST)
-    public String replyContent(@PathVariable Long id, Comment comment, HttpServletRequest request, HttpServletResponse response){
+    public String replyContent(@PathVariable Long id, Comment comment, HttpServletRequest request, HttpServletResponse response, Model model){
         String userNo = getUserNo(request, response);
         comment.setId(id);
         MessageResult mr;
@@ -66,7 +65,9 @@ public class CommentController extends BaseController{
             e.printStackTrace();
             mr = getCodeAndMsg(999, e.getMessage());
         }
-        return JSONObject.valueToString(mr);
+        model.addAttribute("id", id);
+
+        return "/comment/contentList";
     }
 
     @ResponseBody
@@ -75,6 +76,13 @@ public class CommentController extends BaseController{
         List<Comment> commentList = commentService.queryParentTitleAndContent(id);
 
         return JSONObject.valueToString(commentList);
+    }
+
+    @RequestMapping("/contentList/{id}")
+    public String redirectToContentList(@PathVariable Long id, HttpServletRequest request, Model model){
+        model.addAttribute("id", id);
+
+        return "/comment/contentList";
     }
 
 }
