@@ -40,13 +40,6 @@ public class CommentController extends BaseController{
         return JSONObject.valueToString(commentList);
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(HttpServletRequest request, HttpServletResponse response, Model model){
-        String userNo = getUserNo(request, response);
-
-        model.addAttribute("userNo", userNo);
-        return "../../index";
-    }
 
     @RequestMapping(value = "/addComment", method = RequestMethod.POST)
     public String addComment(Comment comment, HttpServletRequest request, HttpServletResponse response, Model model){
