@@ -2,6 +2,7 @@ package accew.comment.web;
 
 import accew.comment.model.Comment;
 import accew.comment.service.CommentService;
+import accew.common.BaseController;
 import org.apache.commons.lang.StringUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -23,7 +24,7 @@ import java.util.Random;
  */
 @Controller
 @RequestMapping("/comment")
-public class CommentController {
+public class CommentController extends BaseController{
 
     private static Logger logger = accew.modules.logger.Logger.getLog(CommentController.class);
 
@@ -46,37 +47,13 @@ public class CommentController {
 
     @RequestMapping(value = "/addComment", method = RequestMethod.POST)
     public String addComment(Comment comment, HttpServletRequest request, HttpServletResponse response){
-        String jSessionId = "";
-        String sessionId = request.getSession().getId();
-        if (request.getCookies() != null && request.getCookies().length > 0){
-            boolean flag = true;
-            for (Cookie cookie : request.getCookies()){
-                if (sessionId.equals(cookie.getName())){
-                    comment.setCreateUser(cookie.getValue());
-                    flag = false;
-                    break;
-                }
-            }
-            if (flag){
-                for (Cookie cookie : request.getCookies()){
-                    if ("JSESSIONID".equals(cookie.getName())){
-                        jSessionId = cookie.getValue();
-                        break;
-                    }
-                }
-                if (jSessionId.equals(sessionId) || StringUtils.isEmpty(jSessionId)){
-                    Cookie newCookie = new Cookie(sessionId, "acc"+ new Random(100).nextInt());
-                    newCookie.setMaxAge(3600*24);
-                    response.addCookie(newCookie);
-                    comment.setCreateUser(newCookie.getValue());
-                }
-            }
-
-        }else {
-            comment.setCreateUser("no cookie");
-        }
+        String userNo = getUserNo(request, response);
+        comment.setCreateUser(userNo);
 
         commentService.addComment(comment);
         return "/comment/list";
     }
+
+
+
 }
