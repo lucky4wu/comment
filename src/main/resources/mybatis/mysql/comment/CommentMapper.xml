@@ -385,6 +385,9 @@
     <if test="id != null and id != '' ">
       and id = #{id,jdbcType=BIGINT}
     </if>
+    <if test="parentId != null and parentId != '' ">
+      and parent_id = #{parentId,jdbcType=BIGINT}
+    </if>
     <if test="title != null and title != '' ">
       and title like CONCAT('%', #{title,jdbcType=VARCHAR},'%')
     </if>

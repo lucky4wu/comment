@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -54,5 +55,20 @@ public class CommentService {
     public List<Comment> queryPage() {
         Comment comment = new Comment();
         return commentDao.selectList(comment);
+    }
+
+    public List<Comment> queryParentTitleAndContent(Long id) {
+        Comment parentTitle = commentDao.selectByPrimaryKey(id);
+
+        Comment comment = new Comment();
+        comment.setParentId(parentTitle.getId());
+        List<Comment> commentList = commentDao.selectList(comment);
+        if (commentList != null && commentList.size() > 0){
+            commentList.add(0, parentTitle);
+        }else {
+            commentList = new ArrayList<Comment>();
+            commentList.add(parentTitle);
+        }
+        return commentList;
     }
 }

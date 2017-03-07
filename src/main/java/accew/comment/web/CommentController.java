@@ -60,20 +60,23 @@ public class CommentController extends BaseController{
     public String replyContent(@PathVariable Long id, Comment comment, HttpServletRequest request, HttpServletResponse response){
         String userNo = getUserNo(request, response);
         comment.setId(id);
+        MessageResult mr;
         try {
             commentService.replyContent(comment, userNo);
-            MessageResult mr = getSuccessMsg();
-            return JSONObject.valueToString(mr);
+            mr = getSuccessMsg();
         }catch (Exception e){
-            MessageResult mr = getCodeAndMsg(999, e.getMessage());
-            return JSONObject.valueToString(mr);
+            e.printStackTrace();
+            mr = getCodeAndMsg(999, e.getMessage());
         }
+        return JSONObject.valueToString(mr);
     }
 
+    @ResponseBody
     @RequestMapping(value = "/getParentTitleAndContent/{id}", method = RequestMethod.GET)
-    public String getParentTitleAndContent(Long id, HttpServletRequest request, HttpServletResponse response){
-//        List<Comment> commentList = commentService.queryParentTitleAndContent(id);
-        return "";
+    public String getParentTitleAndContent(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response){
+        List<Comment> commentList = commentService.queryParentTitleAndContent(id);
+
+        return JSONObject.valueToString(commentList);
     }
 
 }
