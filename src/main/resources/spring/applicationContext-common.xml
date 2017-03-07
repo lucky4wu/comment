@@ -82,4 +82,27 @@
         <constructor-arg index="1" value="REUSE" />
     </bean>
 
+    <!-- 使用annotation定义事务 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+    <!-- 事务切面配置 -->
+    <aop:config proxy-target-class="true">
+        <aop:advisor pointcut="execution(* *accew..web..*.*(..))" advice-ref="txAdvice" />
+    </aop:config>
+
+    <!-- 通知配置 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="find*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="has*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="locate*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="*" propagation="REQUIRED" rollback-for="Exception" />
+        </tx:attributes>
+    </tx:advice>
+
 </beans>

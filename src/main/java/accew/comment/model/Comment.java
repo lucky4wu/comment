@@ -43,7 +43,7 @@ public class Comment {
 
     private Date ts;
 
-    private Integer versions;
+    private Long versions;
 
     private String remark;
 
@@ -207,11 +207,11 @@ public class Comment {
         this.ts = ts;
     }
 
-    public Integer getVersions() {
+    public Long getVersions() {
         return versions;
     }
 
-    public void setVersions(Integer versions) {
+    public void setVersions(Long versions) {
         this.versions = versions;
     }
 

@@ -3,6 +3,7 @@ package accew.comment.web;
 import accew.comment.model.Comment;
 import accew.comment.service.CommentService;
 import accew.common.BaseController;
+import accew.common.MessageResult;
 import org.apache.commons.lang.StringUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -54,6 +55,25 @@ public class CommentController extends BaseController{
         return "/comment/list";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/replyContent/{id}", method = RequestMethod.POST)
+    public String replyContent(@PathVariable Long id, Comment comment, HttpServletRequest request, HttpServletResponse response){
+        String userNo = getUserNo(request, response);
+        comment.setId(id);
+        try {
+            commentService.replyContent(comment, userNo);
+            MessageResult mr = getSuccessMsg();
+            return JSONObject.valueToString(mr);
+        }catch (Exception e){
+            MessageResult mr = getCodeAndMsg(999, e.getMessage());
+            return JSONObject.valueToString(mr);
+        }
+    }
 
+    @RequestMapping(value = "/getParentTitleAndContent/{id}", method = RequestMethod.GET)
+    public String getParentTitleAndContent(Long id, HttpServletRequest request, HttpServletResponse response){
+//        List<Comment> commentList = commentService.queryParentTitleAndContent(id);
+        return "";
+    }
 
 }

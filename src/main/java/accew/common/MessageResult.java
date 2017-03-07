@@ -1,9 +1,11 @@
 package accew.common;
 
+import java.io.Serializable;
+
 /**
  * Created by acc on 2017/3/7.
  */
-public class MessageResult<T> {
+public class MessageResult<T> implements Serializable{
 
     private Integer code;
     private String message;
@@ -36,4 +38,6 @@ public class MessageResult<T> {
     public void setInfo(T info) {
         this.info = info;
     }
+
+
 }

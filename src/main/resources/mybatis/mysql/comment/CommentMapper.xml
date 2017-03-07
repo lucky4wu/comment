@@ -22,7 +22,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
     <result column="ts" jdbcType="TIMESTAMP" property="ts" />
-    <result column="versions" jdbcType="INTEGER" property="versions" />
+    <result column="versions" jdbcType="BIGINT" property="versions" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="accew.comment.model.Comment">
     <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
@@ -62,7 +62,7 @@
       #{reportReason,jdbcType=VARCHAR}, #{reportType,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{yn,jdbcType=VARCHAR}, #{checkUser,jdbcType=VARCHAR}, 
       #{checkTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateUser,jdbcType=VARCHAR}, #{ts,jdbcType=TIMESTAMP}, #{versions,jdbcType=INTEGER}, 
+      #{updateUser,jdbcType=VARCHAR}, #{ts,jdbcType=TIMESTAMP}, #{versions,jdbcType=BIGINT},
       #{remark,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="accew.comment.model.Comment">
@@ -197,7 +197,7 @@
         #{ts,jdbcType=TIMESTAMP},
       </if>
       <if test="versions != null">
-        #{versions,jdbcType=INTEGER},
+        #{versions,jdbcType=BIGINT},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=LONGVARCHAR},
@@ -265,7 +265,7 @@
         ts = #{ts,jdbcType=TIMESTAMP},
       </if>
       <if test="versions != null">
-        versions = #{versions,jdbcType=INTEGER},
+        versions = #{versions,jdbcType=BIGINT},
       </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=LONGVARCHAR},
@@ -294,7 +294,7 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_user = #{updateUser,jdbcType=VARCHAR},
       ts = #{ts,jdbcType=TIMESTAMP},
-      versions = #{versions,jdbcType=INTEGER},
+      versions = #{versions,jdbcType=BIGINT},
       remark = #{remark,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -319,7 +319,7 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_user = #{updateUser,jdbcType=VARCHAR},
       ts = #{ts,jdbcType=TIMESTAMP},
-      versions = #{versions,jdbcType=INTEGER}
+      versions = #{versions,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 

@@ -34,7 +34,7 @@
             <p class="navbar-text">Acc's 匿名版，欢迎灌水！</p>
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group " >
-                    <input type="text" name="comment" class="form-control" id="searchTitle" placeholder="搜索..."/>
+                    <input type="text" name="comment" class="form-control"  placeholder="搜索..."/>
                     <button type="button" class="btn btn-default" style="border-color: #ffffff;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 </div>
             </form>
@@ -53,7 +53,7 @@
             <h3>路过留下 <span class="label label-info">爪印</span></h3>
         </div>
         <div class="col-md-10">
-            <form class="form-horizontal"  action="/comment/addComment" id="addForm" method="post">
+            <form class="form-horizontal"  action="${ctx}/comment/addComment" id="addForm" method="post">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">标题</label>
                     <div class="col-sm-10">
