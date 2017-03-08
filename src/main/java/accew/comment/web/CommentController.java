@@ -50,7 +50,7 @@ public class CommentController extends BaseController{
 
         model.addAttribute("userNo", userNo);
 
-        return "../../index";
+        return "/comment/list";
     }
 
     @RequestMapping(value = "/replyContent/{id}", method = RequestMethod.POST)

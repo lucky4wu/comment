@@ -78,11 +78,11 @@
             <table class="table">
                 <tr>
                     <th>昵称</th>
-                    <td>${user.nickName}</td>
+                    <td id="txtUserNickName">${user.nickName}</td>
                 </tr>
                 <tr>
                     <th>ID</th>
-                    <td>${userNo}</td>
+                    <td><span id="txtUserNo"></span></td>
                 </tr>
                 <tr>
                     <img src="${ctx}/static/image/${user.imageUrl}" class="img-responsive img-circle" alt="头像" style="height: 140px;width: 140px;">
@@ -130,6 +130,15 @@
                 $("#ajaxListPage").html(html);
             }
         });
+
+        $.ajax({ url: "${ctx}/index/getUserNo",
+            type:"get",
+            async: true,
+            dataType:"text",
+            success: function (data) {
+                $("#txtUserNo").html(data);
+            }
+        })
     });
 
    function date2str(date) {
