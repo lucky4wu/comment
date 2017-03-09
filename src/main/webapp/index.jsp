@@ -20,8 +20,8 @@
                 <p class="navbar-text">Acc's 匿名版，欢迎灌水！</p>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group " >
-                        <input type="text" name="comment" class="form-control" id="searchTitle" placeholder="搜索..."/>
-                        <button type="button" class="btn btn-default" style="border-color: #ffffff;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        <input type="text" name="comment" class="form-control" id="searchTitleTxt" placeholder="搜索..."/>
+                        <button id="searchTitleBtn" type="button" class="btn btn-default" style="border-color: #ffffff;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </div>
                 </form>
             </div>
@@ -112,24 +112,8 @@
 
 <script type="text/javascript" >
    $(function(){
-        var html = "";
-        html += "<tr><th class='col-md-10'></th><th class='col-md-2'></th></tr>";
-        $.ajax({ url: "${ctx}/comment/listPage",
-            type:"get",
-            async:true,
-            dataType:"json",
-            success: function(data){
-                $.each(data, function (i, item) {
-                    html += "<tr>";
-                    html += "<td><a href='${ctx}/comment/contentList/"+ item.id + "' target='_blank' >" + item.title + "</a></td>";
-                    html += "<td><h5><small>" + item.createUser + "</small></h5>";
-                    html += "<h6><small>" + date2str(item.createTime) + "</small></h6></td>";
-                    html += "</tr>";
-                });
 
-                $("#ajaxListPage").html(html);
-            }
-        });
+        searchListPgae();
 
         $.ajax({ url: "${ctx}/index/getUserNo",
             type:"get",
@@ -140,6 +124,33 @@
             }
         })
     });
+
+   $("#searchTitleBtn").click(function () {
+       searchListPgae();
+   });
+
+   function searchListPgae() {
+       var html = "";
+       html += "<tr><th class='col-md-10'></th><th class='col-md-2'></th></tr>";
+
+       $.ajax({ url: "${ctx}/comment/listPage",
+           type:"get",
+           async:true,
+           dataType:"json",
+           data:{"title": $('#searchTitleTxt').val()},
+           success: function(data){
+               $.each(data, function (i, item) {
+                   html += "<tr>";
+                   html += "<td><a href='${ctx}/comment/contentList/"+ item.id + "' target='_blank' >" + item.title + "</a></td>";
+                   html += "<td><h5><small>" + item.createUser + "</small></h5>";
+                   html += "<h6><small>" + date2str(item.createTime) + "</small></h6></td>";
+                   html += "</tr>";
+               });
+
+               $("#ajaxListPage").html(html);
+           }
+       });
+   }
 
    function date2str(date) {
        return date.substr(0,20)

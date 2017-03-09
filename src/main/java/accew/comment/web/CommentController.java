@@ -34,8 +34,8 @@ public class CommentController extends BaseController{
 
     @ResponseBody
     @RequestMapping(value = "/listPage", method = RequestMethod.GET)
-    public String listPage(HttpServletRequest request, Model model){
-        List<Comment> commentList = commentService.queryPage();
+    public String listPage(HttpServletRequest request, Model model, Comment comment){
+        List<Comment> commentList = commentService.queryPage(comment);
 
         return JSONObject.valueToString(commentList);
     }
@@ -83,6 +83,12 @@ public class CommentController extends BaseController{
         model.addAttribute("id", id);
 
         return "/comment/contentList";
+    }
+
+    @RequestMapping("/remind/{userNo}")
+    public String remind(@PathVariable String userNo, HttpServletRequest request){
+
+        return null;
     }
 
 }

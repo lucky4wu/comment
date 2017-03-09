@@ -52,8 +52,7 @@ public class CommentService {
         commentDao.insert(childComment);
     }
 
-    public List<Comment> queryPage() {
-        Comment comment = new Comment();
+    public List<Comment> queryPage(Comment comment) {
         comment.setType("03");
         return commentDao.selectList(comment);
     }
