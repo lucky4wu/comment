@@ -48,5 +48,9 @@
         <property name="maxInMemorySize" value="4096" />
     </bean>
 
-
+    <mvc:interceptors>
+        <bean class="accew.common.security.LoginInterceptor">
+            <property name="include" value="/admin/**"></property>
+        </bean>
+    </mvc:interceptors>
 </beans>

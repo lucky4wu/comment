@@ -60,6 +60,7 @@ public class CommentController extends BaseController{
         MessageResult mr;
         try {
             commentService.replyContent(comment, userNo);
+            response.sendRedirect("/comment/contentList/"+id);
             mr = getSuccessMsg();
         }catch (Exception e){
             e.printStackTrace();

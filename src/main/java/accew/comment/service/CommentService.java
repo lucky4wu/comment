@@ -57,6 +57,10 @@ public class CommentService {
         return commentDao.selectList(comment);
     }
 
+    public List<Comment> queryPage(Comment comment, int pageNum, int pageSize){
+        return commentDao.selectList(comment);
+    }
+
     public List<Comment> queryParentTitleAndContent(Long id) {
         Comment parentTitle = commentDao.selectByPrimaryKey(id);
 

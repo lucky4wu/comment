@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>匿名版</title>
-    <jsp:include page="${ctx}/WEB-INF/pages/common/baseui.jsp" />
+    <%@ include file="/WEB-INF/pages/common/baseui.jsp" %>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -28,7 +28,7 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid">
+<div class="container-fluid" >
     <div class="row">
         <div class="col-md-12">
             <p class="navbar-text"></p>
