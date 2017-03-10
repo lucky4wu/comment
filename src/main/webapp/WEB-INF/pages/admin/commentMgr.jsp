@@ -89,7 +89,7 @@
                     html += "<td><a href='${ctx}/comment/contentList/"+ item.id + "' target='_blank' >" + item.title + "</a></td>";
                     html += "<td>" + item.comment +"</td>"
                     html += "<td>" + item.type +"</td>"
-                    html += "<td>" + item.status +"</td>"
+                    html += "<td>" + statusFormat(item.status) +"</td>"
                     html += "<td><h5><small>" + item.createUser + "</small></h5>";
                     html += "<h6><small>" + (item.createTime) + "</small></h6></td>";
                     html += "<td><a href='${ctx}/admin/check/"+ item.id + "/version/"+ item.versions +"' >"  +"审核通过&nbsp;"+ "</a>";
@@ -100,6 +100,15 @@
                 $("#ajaxListPage").html(html);
             }
         });
+    }
+
+    function statusFormat(val){
+        var list = ${statusListJson};
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].value == val) {
+                return list[i].name;
+            }
+        }
     }
 </script>
 </body>

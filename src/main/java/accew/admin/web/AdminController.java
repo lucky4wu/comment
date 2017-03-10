@@ -9,7 +9,7 @@ import accew.common.constant.SysConstants;
 import accew.common.enums.CommentStatus;
 import accew.common.enums.SysEnum;
 import accew.modules.utils.LoginSession;
-import org.json.JSONArray;
+import net.sf.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,6 +54,8 @@ public class AdminController extends BaseController{
             enumList.add(sysEnum);
         }
         model.addAttribute("statusList", enumList);
+        JSONArray statusListJson = JSONArray.fromObject(enumList);
+        model.addAttribute("statusListJson", statusListJson);
         return "/admin/commentMgr";
     }
 
