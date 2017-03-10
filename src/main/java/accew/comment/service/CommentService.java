@@ -2,6 +2,7 @@ package accew.comment.service;
 
 import accew.comment.dao.CommentDao;
 import accew.comment.model.Comment;
+import accew.common.enums.CommentStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,10 +55,13 @@ public class CommentService {
 
     public List<Comment> queryPage(Comment comment) {
         comment.setType("03");
+        comment.setYn("Y");
+        comment.setStatus("03");
         return commentDao.selectList(comment);
     }
 
     public List<Comment> queryPage(Comment comment, int pageNum, int pageSize){
+        comment.setYn("Y");
         return commentDao.selectList(comment);
     }
 
@@ -74,5 +78,21 @@ public class CommentService {
             commentList.add(parentTitle);
         }
         return commentList;
+    }
+
+    @Transactional(value = "transactionManager", readOnly = false)
+    public void check(Comment comment, String userNo) {
+        comment.setCheckTime(Calendar.getInstance().getTime());
+        comment.setCheckUser(userNo);
+        comment.setStatus(CommentStatus.checked.getValue());
+        commentDao.updateByPrimaryKeySelective(comment);
+    }
+
+    @Transactional(value = "transactionManager", readOnly = false)
+    public void delete(Comment comment, String userNo) {
+        comment.setCheckTime(Calendar.getInstance().getTime());
+        comment.setCheckUser(userNo);
+        comment.setYn("N");
+        commentDao.updateByPrimaryKeySelective(comment);
     }
 }

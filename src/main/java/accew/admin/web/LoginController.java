@@ -12,6 +12,7 @@ import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Created by acc on 2017/3/9.
@@ -31,7 +32,12 @@ public class LoginController extends BaseController {
             LoginSession loginSession = new LoginSession();
             loginSession.setUserNo(getUserNo(request, response));
             request.getSession().setAttribute(SysConstants.LOGIN_ADMIN_SESSION, loginSession);
-            return "/admin/commentCheck";
+            try {
+                response.sendRedirect("/admin/commentMgr");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return "/admin/commentMgr";
         }else {
             model.addAttribute("errorMsg", "用户名或密码错误!");
             return "/in/login";
