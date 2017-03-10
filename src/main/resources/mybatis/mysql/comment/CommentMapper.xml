@@ -7,6 +7,8 @@
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="comment" jdbcType="VARCHAR" property="comment" />
     <result column="reply" jdbcType="VARCHAR" property="reply" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="is_top" jdbcType="INTEGER" property="isTop" />
     <result column="top" jdbcType="INTEGER" property="top" />
     <result column="step" jdbcType="INTEGER" property="step" />
     <result column="collect" jdbcType="INTEGER" property="collect" />
@@ -28,7 +30,7 @@
     <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, parent_id, title, comment, reply, top, step, collect, is_report, report_reason, 
+    id, parent_id, title, comment, reply, image_url, is_top, top, step, collect, is_report, report_reason,
     report_type, type, status, yn, check_user, check_time, create_user, create_time, 
     update_user, ts, versions
   </sql>
@@ -49,7 +51,7 @@
   </delete>
   <insert id="insert" parameterType="accew.comment.model.Comment">
     insert into comment ( parent_id, title,
-      comment, reply, top, 
+      comment, reply, image_url, is_top, top,
       step, collect, is_report, 
       report_reason, report_type, type, 
       status, yn, check_user, 
@@ -57,7 +59,7 @@
       update_user, ts, versions, 
       remark)
     values ( #{parentId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR},
-      #{comment,jdbcType=VARCHAR}, #{reply,jdbcType=VARCHAR}, #{top,jdbcType=INTEGER}, 
+      #{comment,jdbcType=VARCHAR}, #{reply,jdbcType=VARCHAR},#{imageUrl,jdbcType=VARCHAR}, #{isTop,jdbcType=INTEGER}, #{top,jdbcType=INTEGER},
       #{step,jdbcType=INTEGER}, #{collect,jdbcType=INTEGER}, #{isReport,jdbcType=VARCHAR}, 
       #{reportReason,jdbcType=VARCHAR}, #{reportType,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{yn,jdbcType=VARCHAR}, #{checkUser,jdbcType=VARCHAR}, 

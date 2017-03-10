@@ -42,11 +42,11 @@ public class CommentController extends BaseController{
 
 
     @RequestMapping(value = "/addComment", method = RequestMethod.POST)
-    public String addComment(Comment comment, HttpServletRequest request, HttpServletResponse response, Model model){
+    public String addComment(Comment c, HttpServletRequest request, HttpServletResponse response, Model model){
         String userNo = getUserNo(request, response);
-        comment.setCreateUser(userNo);
+        c.setCreateUser(userNo);
 
-        commentService.addComment(comment);
+        commentService.addComment(c);
 
         model.addAttribute("userNo", userNo);
 

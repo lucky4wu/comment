@@ -56,7 +56,7 @@ public class CommentService {
     public List<Comment> queryPage(Comment comment) {
         comment.setType("03");
         comment.setYn("Y");
-        comment.setStatus("03");
+        comment.setStatus(CommentStatus.checked.getValue());
         return commentDao.selectList(comment);
     }
 
@@ -70,6 +70,8 @@ public class CommentService {
 
         Comment comment = new Comment();
         comment.setParentId(parentTitle.getId());
+        comment.setYn("Y");
+        comment.setStatus(CommentStatus.checked.getValue());
         List<Comment> commentList = commentDao.selectList(comment);
         if (commentList != null && commentList.size() > 0){
             commentList.add(0, parentTitle);

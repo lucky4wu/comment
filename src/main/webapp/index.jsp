@@ -53,7 +53,7 @@
             <h3>路过留下 <span class="label label-info">爪印</span></h3>
         </div>
         <div class="col-md-10">
-            <form class="form-horizontal"  action="${ctx}/comment/addComment" id="addForm" method="post">
+            <form class="form-horizontal"  action="${ctx}/comment/addComment" id="addForm" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">标题</label>
                     <div class="col-sm-10">
@@ -66,6 +66,12 @@
                         <textarea type="text" name="comment" class="form-control" id="txtComment" placeholder="请输入内容" style="height: 180px;"></textarea>
                     </div>
                 </div>
+                <%--<div class="form-group">--%>
+                    <%--<label class="col-sm-2 control-label">上传图片</label>--%>
+                    <%--<div class="col-sm-10">--%>
+                        <%--<input type="file" name="imageUrl" class="form-control" id="txtImageUrl"  />--%>
+                    <%--</div>--%>
+                <%--</div>--%>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary" style="width: 100px;">提交</button>
@@ -93,7 +99,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="progress">
-                <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
                     正在施工
                 </div>
             </div>

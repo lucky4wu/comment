@@ -13,6 +13,10 @@ public class Comment {
 
     private String reply;
 
+    private String imageUrl;
+
+    private Integer isTop;
+
     private Integer top;
 
     private Integer step;
@@ -85,6 +89,22 @@ public class Comment {
 
     public void setReply(String reply) {
         this.reply = reply == null ? null : reply.trim();
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Integer getIsTop() {
+        return isTop;
+    }
+
+    public void setIsTop(Integer isTop) {
+        this.isTop = isTop;
     }
 
     public Integer getTop() {
