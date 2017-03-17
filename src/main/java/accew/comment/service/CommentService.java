@@ -3,10 +3,12 @@ package accew.comment.service;
 import accew.comment.dao.CommentDao;
 import accew.comment.model.Comment;
 import accew.common.enums.CommentStatus;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -84,6 +86,15 @@ public class CommentService {
 
     @Transactional(value = "transactionManager", readOnly = false)
     public void check(Comment comment, String userNo) {
+        Comment commentDb = commentDao.selectByPrimaryKey(comment.getId());
+        if (StringUtils.isNotEmpty(commentDb.getImageUrl())){
+            String path = "/Users/acc/Desktop/temp_img" + commentDb.getImageUrl();
+            File file = new File(path);
+            if (file.isFile() && file.exists()){
+                String webUploadPath = "/Users/acc/Desktop/comment_test/comment_test/src/main/webapp/upload/";
+                File imageFile = new File(webUploadPath + file.getName());
+            }
+        }
         comment.setCheckTime(Calendar.getInstance().getTime());
         comment.setCheckUser(userNo);
         comment.setStatus(CommentStatus.checked.getValue());

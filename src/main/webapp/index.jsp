@@ -66,12 +66,12 @@
                         <textarea type="text" name="comment" class="form-control" id="txtComment" placeholder="请输入内容" style="height: 180px;"></textarea>
                     </div>
                 </div>
-                <%--<div class="form-group">--%>
-                    <%--<label class="col-sm-2 control-label">上传图片</label>--%>
-                    <%--<div class="col-sm-10">--%>
-                        <%--<input type="file" name="imageUrl" class="form-control" id="txtImageUrl"  />--%>
-                    <%--</div>--%>
-                <%--</div>--%>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">上传图片</label>
+                    <div class="col-sm-10">
+                        <input type="file" name="imageFile" class="form-control" id="txtImageFile"  />
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary" style="width: 100px;">提交</button>
@@ -148,6 +148,7 @@
                $.each(data, function (i, item) {
                    html += "<tr>";
                    html += "<td><a href='${ctx}/comment/contentList/"+ item.id + "' target='_blank' >" + item.title + "</a></td>";
+                   html += "<img src='"+ item.imageUrl+"' alt='留言图片' class='img-responsive' />";
                    html += "<td><h5><small>" + item.createUser + "</small></h5>";
                    html += "<h6><small>" + date2str(item.createTime) + "</small></h6></td>";
                    html += "</tr>";
