@@ -23,13 +23,13 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">用户名</label>
                     <div class="col-sm-10">
-                        <input type="text" name="name" class="form-control" id="txtName" placeholder="请输入用户名"/>
+                        <input type="text" autocomplete="off" name="name" class="form-control" id="txtName" placeholder="请输入用户名"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">密码</label>
                     <div class="col-sm-10">
-                        <input type="password" name="password" class="form-control" id="txtPassword" placeholder="请输入密码"/>
+                        <input type="text" onfocus="this.type='password'" name="password" class="form-control" id="txtPassword" placeholder="请输入密码"/>
                     </div>
                 </div>
                 <div class="form-group">

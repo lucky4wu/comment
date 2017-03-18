@@ -28,8 +28,12 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String doLogin(User user, HttpServletRequest request, HttpServletResponse response, Model model){
+        LoginSession loginSession = (LoginSession) request.getSession().getAttribute(SysConstants.LOGIN_ADMIN_SESSION);
+        if (loginSession != null) {
+            return "/admin/commentMgr";
+        }
         if ("admin".equals(user.getName()) && "1234".equals(user.getPassword())){
-            LoginSession loginSession = new LoginSession();
+            loginSession = new LoginSession();
             loginSession.setUserNo(getUserNo(request, response));
             request.getSession().setAttribute(SysConstants.LOGIN_ADMIN_SESSION, loginSession);
             try {

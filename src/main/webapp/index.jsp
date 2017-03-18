@@ -9,7 +9,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-    <title>匿名版</title>
+    <title>Acc旅游</title>
     <%@ include file="/WEB-INF/pages/common/baseui.jsp" %>
 </head>
 <body>
@@ -28,7 +28,7 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid" >
+<div class="container-fluid" style="width: 1024px;">
     <div class="row">
         <div class="col-md-12">
             <p class="navbar-text"></p>
@@ -98,6 +98,16 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <table class="table">
+                <tr class="col-xs-4">
+                    <th>联系方式（微信号）:</th>
+                    <td>994665236</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="progress">
                 <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
                     正在施工
@@ -105,14 +115,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <img src="${ctx}/static/image/zhifubao.jpg" class="img-responsive" alt="支付二维码" title="一分钱也是爱" style="height: 480px;width: 320px;">
-        </div>
-        <div class="col-md-12">
-            <img src="${ctx}/static/image/zhifubao-2.jpg" class="img-responsive" alt="支付二维码" title="捐助开发者团队" style="height: 480px;width: 320px;">
-        </div>
-    </div>
+
 </div>
 
 
@@ -185,6 +188,6 @@
         return  checkflag.title && checkflag.comment;
     });
 </script>
-<jsp:include page="${ctx}/WEB-INF/pages/common/footer.jsp" />
+<%@ include file="/WEB-INF/pages/common/footer.jsp" %>
 </body>
 </html>
