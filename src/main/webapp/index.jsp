@@ -150,8 +150,11 @@
            success: function(data){
                $.each(data, function (i, item) {
                    html += "<tr>";
-                   html += "<td><a href='${ctx}/comment/contentList/"+ item.id + "' target='_blank' >" + item.title + "</a></td>";
-                   html += "<img src='"+ item.imageUrl+"' alt='留言图片' class='img-responsive' />";
+                   html += "<td><a href='${ctx}/comment/contentList/"+ item.id + "' target='_blank' >" + item.title + "</a>";
+                   if (item.imageUrl != '' && item.imageUrl != undefined){
+                       html += "<img src='${ctx}"+ item.imageUrl+"' alt='留言图片' class='img-responsive' />";
+                   }
+                   html += "</td>";
                    html += "<td><h5><small>" + item.createUser + "</small></h5>";
                    html += "<h6><small>" + date2str(item.createTime) + "</small></h6></td>";
                    html += "</tr>";

@@ -60,6 +60,8 @@ public class CommentController extends BaseController{
                 MultipartFile file = multiRequest.getFile(iter.next().toString());
 
                 if (file != null){
+                    String contextPath = request.getContextPath();
+                    String servletPath = request.getServletPath();
                     String path = "/Users/acc/Desktop/temp_img/upload/" + file.getOriginalFilename();
                     c.setImageUrl("/upload/" + file.getOriginalFilename());
                     try {
