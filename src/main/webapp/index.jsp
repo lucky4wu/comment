@@ -28,7 +28,7 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid" style="width: 1024px;">
+<div class="container-fluid" id="container">
     <div class="row">
         <div class="col-md-12">
             <p class="navbar-text"></p>
@@ -121,6 +121,7 @@
 
 <script type="text/javascript" >
    $(function(){
+       init();
 
         searchListPgae();
 
@@ -132,7 +133,17 @@
                 $("#txtUserNo").html(data);
             }
         })
+
     });
+
+   function init(){
+       var width = $(window).width();
+       if (width > 1024){
+           $('#container').attr("style", "width:1024px;");
+       }else {
+           $('#container').attr("style", "width:100%;");
+       }
+   }
 
    $("#searchTitleBtn").click(function () {
        searchListPgae();
