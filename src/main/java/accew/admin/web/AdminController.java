@@ -9,7 +9,9 @@ import accew.common.constant.SysConstants;
 import accew.common.enums.CommentStatus;
 import accew.common.enums.SysEnum;
 import accew.modules.utils.LoginSession;
-import net.sf.json.JSONArray;
+import com.alibaba.fastjson.JSON;
+import jdk.nashorn.internal.ir.debug.JSONWriter;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,24 +56,26 @@ public class AdminController extends BaseController{
             enumList.add(sysEnum);
         }
         model.addAttribute("statusList", enumList);
-        JSONArray statusListJson = JSONArray.fromObject(enumList);
+        String statusListJson = JSONObject.valueToString(enumList);
         model.addAttribute("statusListJson", statusListJson);
         return "/admin/commentMgr";
     }
 
+    @ResponseBody
     @RequestMapping("check/{id}/version/{versions}")
     public String check(@PathVariable Long id, @PathVariable Long versions, HttpServletResponse response)  {
         String userNo = "admin";
         Comment comment = new Comment();
         comment.setId(id);
         comment.setVersions(versions);
-        commentService.check(comment, userNo);
+        MessageResult mr = getSuccessMsg();
         try {
-            response.sendRedirect("/admin/commentMgr");
-        } catch (IOException e) {
+            commentService.check(comment, userNo);
+        } catch (Exception e) {
             e.printStackTrace();
+            mr = getCodeAndMsg(999, e.getMessage());
         }
-        return "/admin/commentMgr";
+        return JSON.toJSONString(mr);
     }
 
     @RequestMapping("delete/{id}/version/{versions}")
@@ -80,13 +84,14 @@ public class AdminController extends BaseController{
         Comment comment = new Comment();
         comment.setId(id);
         comment.setVersions(versions);
-        commentService.delete(comment, userNo);
+        MessageResult mr = getSuccessMsg();
         try {
-            response.sendRedirect("/admin/commentMgr");
-        } catch (IOException e) {
+            commentService.delete(comment, userNo);
+        } catch (Exception e) {
             e.printStackTrace();
+            mr = getCodeAndMsg(999, e.getMessage());
         }
-        return "/admin/commentMgr";
+        return JSON.toJSONString(mr);
     }
 
 }

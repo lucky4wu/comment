@@ -96,12 +96,48 @@
                     html += "<td>" + statusFormat(item.status) +"</td>"
                     html += "<td><h5><small>" + item.createUser + "</small></h5>";
                     html += "<h6><small>" + (item.createTime) + "</small></h6></td>";
-                    html += "<td><a href='${ctx}/admin/check/"+ item.id + "/version/"+ item.versions +"' >"  +"审核通过&nbsp;"+ "</a>";
-                    html += "<a href='${ctx}/admin/delete/"+ item.id + "/version/"+ item.versions +"' >删除"  +"</a></td>"
+                    html += "<td><a href='#' onclick='check("+item.id+", "+item.versions+")' >"  +"审核通过&nbsp;"+ "</a>";
+                    html += "<a href='#' onclick='deleteComment("+item.id+", "+item.versions+")' >删除"  +"</a></td>"
                     html += "</tr>";
                 });
 
                 $("#ajaxListPage").html(html);
+            }
+        });
+    }
+
+    function check(id, versions){
+        $.ajax({ url: "${ctx}/admin/check/" + id + "/version/" + versions,
+            type:"get",
+            async:false,
+            dataType:"json",
+            success: function(data){
+                if(data.code == 0){
+                    searchListPgae();
+                }else {
+                    alert(data);
+                }
+            },
+            error: function () {
+                alert("操作失败");
+            }
+        });
+    }
+
+    function deleteComment(id, versions){
+        $.ajax({ url: "${ctx}/admin/delete/" + id + "/version/" + versions,
+            type:"get",
+            async:false,
+            dataType:"json",
+            success: function(data){
+                if(data.code == 0){
+                    searchListPgae();
+                }else {
+                    alert(data);
+                }
+            },
+            error: function () {
+                alert("操作失败");
             }
         });
     }
