@@ -4,6 +4,7 @@ import accew.comment.model.Comment;
 import accew.comment.service.CommentService;
 import accew.common.BaseController;
 import accew.common.MessageResult;
+import accew.common.file.PropertyUtil;
 import org.apache.commons.lang.StringUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -48,6 +49,16 @@ public class CommentController extends BaseController{
         String userNo = getUserNo(request, response);
         c.setCreateUser(userNo);
 
+        saveUploadFile(request, c);
+
+        commentService.addComment(c);
+
+        model.addAttribute("userNo", userNo);
+
+        return "/comment/list";
+    }
+
+    private void saveUploadFile(HttpServletRequest request, Comment c){
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
         //检查form中是否有enctype="multipart/form-data"
         if (multipartResolver.isMultipart(request)){
@@ -60,10 +71,18 @@ public class CommentController extends BaseController{
                 MultipartFile file = multiRequest.getFile(iter.next().toString());
 
                 if (file != null){
-                    String contextPath = request.getContextPath();
-                    String servletPath = request.getServletPath();
-                    String path = "/Users/acc/Desktop/temp_img/upload/" + file.getOriginalFilename();
-                    c.setImageUrl("/upload/" + file.getOriginalFilename());
+                    if (StringUtils.isEmpty(file.getOriginalFilename())){
+                        continue;
+                    }
+                    String newFileName = UUID.randomUUID().toString();
+                    int start = file.getOriginalFilename().indexOf(".");
+                    if (start != -1){
+                        newFileName = newFileName.concat(file.getOriginalFilename().substring(start, file.getOriginalFilename().length()));
+                    }else {
+                        newFileName = newFileName.concat(".jpg");
+                    }
+                    String path = PropertyUtil.getProperty("file.properties", "uploadFilePath") + newFileName;
+                    c.setImageUrl("/upload/" + newFileName);
                     try {
                         file.transferTo(new File(path));
                     } catch (IOException e) {
@@ -72,17 +91,15 @@ public class CommentController extends BaseController{
                 }
             }
         }
-        commentService.addComment(c);
-
-        model.addAttribute("userNo", userNo);
-
-        return "/comment/list";
     }
 
     @RequestMapping(value = "/replyContent/{id}", method = RequestMethod.POST)
     public String replyContent(@PathVariable Long id, Comment comment, HttpServletRequest request, HttpServletResponse response, Model model){
         String userNo = getUserNo(request, response);
         comment.setId(id);
+
+        saveUploadFile(request, comment);
+
         MessageResult mr;
         try {
             commentService.replyContent(comment, userNo);

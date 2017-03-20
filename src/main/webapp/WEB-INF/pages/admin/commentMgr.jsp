@@ -87,7 +87,11 @@
                 $.each(data, function (i, item) {
                     html += "<tr>";
                     html += "<td><a href='${ctx}/comment/contentList/"+ item.id + "' target='_blank' >" + item.title + "</a></td>";
-                    html += "<td>" + item.comment +"</td>"
+                    html += "<td>" + item.comment +"";
+                    if (item.imageUrl != '' && item.imageUrl != undefined){
+                        html += "<img src='${ctx}"+ item.imageUrl+"' alt='留言图片' class='img-responsive' />";
+                    }
+                    html += "</td>";
                     html += "<td>" + item.type +"</td>"
                     html += "<td>" + statusFormat(item.status) +"</td>"
                     html += "<td><h5><small>" + item.createUser + "</small></h5>";

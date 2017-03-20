@@ -3,6 +3,7 @@ package accew.comment.service;
 import accew.comment.dao.CommentDao;
 import accew.comment.model.Comment;
 import accew.common.enums.CommentStatus;
+import accew.common.enums.IsYn;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,11 @@ public class CommentService {
     public void addComment(Comment comment){
         comment.setParentId(0L);
         comment.setType("03");
-        comment.setStatus("01");
+        if (StringUtils.isNotEmpty(comment.getImageUrl())){
+            comment.setStatus(CommentStatus.init.getValue());
+        } else {
+            comment.setStatus(CommentStatus.checked.getValue());
+        }
         comment.setYn("Y");
         comment.setCreateTime(Calendar.getInstance().getTime());
         comment.setVersions(0L);
@@ -45,8 +50,14 @@ public class CommentService {
         Comment childComment = new Comment();
         childComment.setParentId(comment.getId());
         childComment.setComment(comment.getComment());
+        childComment.setTitle("");
         childComment.setType("01");
-        childComment.setStatus("01");
+        childComment.setImageUrl(comment.getImageUrl());
+        if (StringUtils.isNotEmpty(childComment.getImageUrl())){
+            childComment.setStatus(CommentStatus.init.getValue());
+        }else {
+            childComment.setStatus(CommentStatus.checked.getValue());
+        }
         childComment.setYn("Y");
         childComment.setCreateUser(userNo);
         childComment.setCreateTime(Calendar.getInstance().getTime());
@@ -57,7 +68,7 @@ public class CommentService {
 
     public List<Comment> queryPage(Comment comment) {
         comment.setType("03");
-        comment.setYn("Y");
+        comment.setYn(IsYn.YES.getValue());
         comment.setStatus(CommentStatus.checked.getValue());
         return commentDao.selectList(comment);
     }
@@ -74,7 +85,7 @@ public class CommentService {
         comment.setParentId(parentTitle.getId());
         comment.setYn("Y");
         comment.setStatus(CommentStatus.checked.getValue());
-        List<Comment> commentList = commentDao.selectList(comment);
+        List<Comment> commentList = commentDao.selectListByParentId(comment);
         if (commentList != null && commentList.size() > 0){
             commentList.add(0, parentTitle);
         }else {
@@ -87,14 +98,6 @@ public class CommentService {
     @Transactional(value = "transactionManager", readOnly = false)
     public void check(Comment comment, String userNo) {
         Comment commentDb = commentDao.selectByPrimaryKey(comment.getId());
-        if (StringUtils.isNotEmpty(commentDb.getImageUrl())){
-            String path = "/Users/acc/Desktop/temp_img" + commentDb.getImageUrl();
-            File file = new File(path);
-            if (file.isFile() && file.exists()){
-                String webUploadPath = "/Users/acc/Desktop/comment_test/comment_test/src/main/webapp/upload/";
-                File imageFile = new File(webUploadPath + file.getName());
-            }
-        }
         comment.setCheckTime(Calendar.getInstance().getTime());
         comment.setCheckUser(userNo);
         comment.setStatus(CommentStatus.checked.getValue());

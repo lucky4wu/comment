@@ -332,8 +332,20 @@
     FROM comment
     WHERE Yn = 'Y'
     <include refid="pageQueryCondition"/>
-    order by create_time desc
     ) F
+    order by create_time desc
+    limit 200
+  </select>
+
+  <select id="selectListByParentId" parameterType="accew.comment.model.Comment" resultMap="BaseResultMap">
+    SELECT * FROM (
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM comment
+    WHERE Yn = 'Y'
+    <include refid="pageQueryCondition"/>
+    ) F
+    order by create_time ASC
     limit 200
   </select>
 

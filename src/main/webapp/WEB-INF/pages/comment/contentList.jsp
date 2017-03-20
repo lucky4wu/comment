@@ -24,12 +24,20 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <form class="form-horizontal"  action="${ctx}/comment/replyContent/${id}" id="addForm" method="post">
+            <form class="form-horizontal"  action="${ctx}/comment/replyContent/${id}" id="addForm" method="post" enctype="multipart/form-data">
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">回复</label>
                     <div class="col-sm-10">
                         <textarea type="text" name="comment" class="form-control" id="txtComment" placeholder="请输入内容" style="height: 180px;"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">上传图片</label>
+                    <div class="col-sm-10">
+                        <div class="col-sm-10">
+                            <input type="file" name="imageFile" class="form-control" id="txtImageFile"  />
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -57,6 +65,9 @@
                         html += "<p>"+ item.comment + "</p>";
                     }else{
                         html += "<tr><td>" + item.createUser + "</td><td><p>" + item.comment + "</p>";
+                    }
+                    if (item.imageUrl != '' && item.imageUrl != undefined){
+                        html += "<img src='${ctx}"+ item.imageUrl+"' alt='留言图片' class='img-responsive' />";
                     }
                     html += date2str(item.createTime) + "</td></tr>"
                 });
