@@ -9,7 +9,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-    <title>Acc旅游</title>
+    <title>Easy Way 旅游</title>
     <%@ include file="/WEB-INF/pages/common/baseui.jsp" %>
 </head>
 <body>
@@ -17,7 +17,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <p class="navbar-text">Acc's 匿名版，欢迎灌水！</p>
+                <p class="navbar-text">Easy Way 旅游，欢迎灌水！</p>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group " >
                         <input type="text" name="comment" class="form-control" id="searchTitleTxt" placeholder="搜索..."/>

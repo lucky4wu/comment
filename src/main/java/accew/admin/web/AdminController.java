@@ -78,6 +78,7 @@ public class AdminController extends BaseController{
         return JSON.toJSONString(mr);
     }
 
+    @ResponseBody
     @RequestMapping("delete/{id}/version/{versions}")
     public String delete(@PathVariable Long id, @PathVariable Long versions, HttpServletResponse response)  {
         String userNo = "admin";
