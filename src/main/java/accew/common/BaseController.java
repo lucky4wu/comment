@@ -3,12 +3,35 @@ package accew.common;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 
 /**
  * Created by acc on 2017/3/7.
  */
 public class BaseController {
+
+    public Map<String, Object> getParamMap(HttpServletRequest request){
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        Iterator it = request.getParameterMap().keySet().iterator();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            String values[] = request.getParameterValues(key);
+            if ("pageSize".equals(key) && "NaN".equals(values[0]))
+            {
+                values[0] = String.valueOf(Integer.MAX_VALUE);
+            }
+            if (values.length == 1) {
+                paramMap.put(key, values[0].trim());
+            }
+            else {
+                paramMap.put(key, values);
+            }
+        }
+        return paramMap;
+    }
 
     public static MessageResult getSuccessMsg(){
         MessageResult mr = new MessageResult();

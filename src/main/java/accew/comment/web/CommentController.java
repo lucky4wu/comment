@@ -5,6 +5,8 @@ import accew.comment.service.CommentService;
 import accew.common.BaseController;
 import accew.common.MessageResult;
 import accew.common.file.PropertyUtil;
+import accew.modules.pagger.PageListDTO;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang.StringUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -37,10 +39,13 @@ public class CommentController extends BaseController{
 
     @ResponseBody
     @RequestMapping(value = "/listPage", method = RequestMethod.GET)
-    public String listPage(HttpServletRequest request, Model model, Comment comment){
-        List<Comment> commentList = commentService.queryPage(comment);
+    public String listPage(HttpServletRequest request, Model model, Comment comment,
+                           @RequestParam("page") long page, @RequestParam("pageSize") long pageSize){
+        Map<String, Object> map = getParamMap(request);
 
-        return JSONObject.valueToString(commentList);
+        PageListDTO<Comment> pageListDTO = commentService.queryCheckedPage(map, page, pageSize);
+
+        return JSON.toJSONString(pageListDTO);
     }
 
 

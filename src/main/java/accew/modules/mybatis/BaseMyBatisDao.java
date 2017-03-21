@@ -1,5 +1,7 @@
 package accew.modules.mybatis;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,8 @@ public interface BaseMyBatisDao<T, PK extends Serializable> {
 
 	List<T> selectList(T entity);
 
-	List<T> selectList(Map<String, Object> paramMap);
+	List<T> queryForList(Map<String, Object> paramMap);
+
+	long queryForCount(Map<String, Object> paramMap);
 
 }
