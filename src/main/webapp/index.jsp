@@ -187,13 +187,13 @@
                if (data.pageCount > 5){
                    pageHtml += "<li><a href='#' onclick='searchListPgae("+(data.currentPage-2)+")'>"+(data.currentPage-2)+"<span class='sr-only'>(current)</span></span></a></li>";
                    pageHtml += "<li><a href='#' onclick='searchListPgae("+(data.currentPage-1)+")'>"+(data.currentPage-1)+"<span class='sr-only'>(current)</span></span></a></li>";
-                   pageHtml += "<li><>"+data.currentPage+"<span class='sr-only'>(current)</span></span></li>";
+                   pageHtml += "<li class='active'><>"+data.currentPage+"<span class='sr-only'>(current)</span></span></li>";
                    pageHtml += "<li><a href='#' onclick='searchListPgae("+(data.currentPage+1)+")'>"+(data.currentPage+1)+"<span class='sr-only'>(current)</span></span></a></li>";
                    pageHtml += "<li><a href='#' onclick='searchListPgae("+(data.currentPage+2)+")'>"+(data.currentPage+2)+"<span class='sr-only'>(current)</span></span></a></li>";
                }else{
                     for (var i=1;i<=data.pageCount;i++){
                         if(i==data.currentPage){
-                            pageHtml += "<li><span>"+ data.currentPage+"<span class='sr-only'>(current)</span></span></li>";
+                            pageHtml += "<li class='active'><span>"+ data.currentPage+"<span class='sr-only'>(current)</span></span></li>";
                         }else{
                             pageHtml += "<li><a href='#' onclick='searchListPgae("+i+")'>"+i+"<span class='sr-only'>(current)</span></a></li>";
                         }
