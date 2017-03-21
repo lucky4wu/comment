@@ -9,7 +9,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-    <title>Acc旅游</title>
+    <title>Easy Way 旅游</title>
     <%@ include file="/WEB-INF/pages/common/baseui.jsp" %>
 </head>
 <body>
@@ -17,10 +17,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <p class="navbar-text">Acc's 匿名版，欢迎灌水！</p>
+                <p class="navbar-text">Easy Way 旅游，欢迎灌水！</p>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group " >
-                        <input type="text" name="comment" class="form-control" id="searchTitleTxt" placeholder="搜索..."/>
+                        <input type="text" name="title" class="form-control" id="searchTitleTxt" placeholder="搜索..."/>
                         <button id="searchTitleBtn" type="button" class="btn btn-default" style="border-color: #ffffff;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </div>
                 </form>
@@ -34,7 +34,7 @@
             <p class="navbar-text"></p>
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group " >
-                    <input type="text" name="comment" class="form-control"  placeholder="搜索..."/>
+                    <input type="text" name="comment" class="form-control" />
                     <button type="button" class="btn btn-default" style="border-color: #ffffff;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 </div>
             </form>
@@ -42,10 +42,14 @@
     </div>
     <div class="row">
         <div class="col-md-12" >
-            <h3>  </h3>
             <table class="table table-hover" id="ajaxListPage" >
 
             </table>
+            <nav aria-label="Page navigation">
+                <ul class="pagination" id="pagination">
+
+                </ul>
+            </nav>
         </div>
     </div>
     <div class="row">
@@ -120,10 +124,11 @@
 
 
 <script type="text/javascript" >
+    var pageSize = 30;
    $(function(){
        init();
 
-        searchListPgae();
+        searchListPgae(1);
 
         $.ajax({ url: "${ctx}/index/getUserNo",
             type:"get",
@@ -146,20 +151,25 @@
    }
 
    $("#searchTitleBtn").click(function () {
-       searchListPgae();
+       searchListPgae(1);
    });
 
-   function searchListPgae() {
+   function searchListPgae(curPage) {
        var html = "";
        html += "<tr><th class='col-md-10'></th><th class='col-md-2'></th></tr>";
+       var pageHtml = "";
 
        $.ajax({ url: "${ctx}/comment/listPage",
            type:"get",
            async:true,
            dataType:"json",
-           data:{"title": $('#searchTitleTxt').val()},
+           data:{
+            "title": $('#searchTitleTxt').val(),
+               "page": curPage,
+               "pageSize":pageSize
+            },
            success: function(data){
-               $.each(data, function (i, item) {
+               $.each(data.pageList, function (i, item) {
                    html += "<tr>";
                    html += "<td><a href='${ctx}/comment/contentList/"+ item.id + "' target='_blank' >" + item.title + "</a>";
                    if (item.imageUrl != '' && item.imageUrl != undefined){
@@ -172,12 +182,32 @@
                });
 
                $("#ajaxListPage").html(html);
+
+               pageHtml += "<li><a href='#' onclick='searchListPgae("+data.prevPage+")' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>";
+               if (data.pageCount > 5){
+                   pageHtml += "<li><a href='#' onclick='searchListPgae("+(data.currentPage-2)+")'>"+(data.currentPage-2)+"<span class='sr-only'>(current)</span></span></a></li>";
+                   pageHtml += "<li><a href='#' onclick='searchListPgae("+(data.currentPage-1)+")'>"+(data.currentPage-1)+"<span class='sr-only'>(current)</span></span></a></li>";
+                   pageHtml += "<li><>"+data.currentPage+"<span class='sr-only'>(current)</span></span></li>";
+                   pageHtml += "<li><a href='#' onclick='searchListPgae("+(data.currentPage+1)+")'>"+(data.currentPage+1)+"<span class='sr-only'>(current)</span></span></a></li>";
+                   pageHtml += "<li><a href='#' onclick='searchListPgae("+(data.currentPage+2)+")'>"+(data.currentPage+2)+"<span class='sr-only'>(current)</span></span></a></li>";
+               }else{
+                    for (var i=1;i<=data.pageCount;i++){
+                        if(i==data.currentPage){
+                            pageHtml += "<li><span>"+ data.currentPage+"<span class='sr-only'>(current)</span></span></li>";
+                        }else{
+                            pageHtml += "<li><a href='#' onclick='searchListPgae("+i+")'>"+i+"<span class='sr-only'>(current)</span></a></li>";
+                        }
+                    }
+               }
+
+               pageHtml += "<li><a href='#' onclick='searchListPgae("+data.nextPage+")' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
+               $("#pagination").html(pageHtml);
            }
        });
    }
 
    function date2str(date) {
-       return date.substr(0,20)
+       return formatterdate(date, 0);
    }
 
    var checkflag = {"title":false, "comment":false};

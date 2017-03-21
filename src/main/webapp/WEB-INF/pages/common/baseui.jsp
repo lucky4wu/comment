@@ -25,7 +25,34 @@
 <script type="text/javascript" src="${ctx}/static/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+    function formatterdate(val, row) {
+        if (val != '' && val != null)
+        {
+            var date = new Date(val);
+            var month = date.getMonth() + 1;
+            if(month > 0 && month < 10) {
+                month = "0" + month;
+            }
+            var day = date.getDate();
+            if(day > 0 && day < 10) {
+                day = "0" + day;
+            }
+            var hour = date.getHours();
+            if(hour >= 0 && hour < 10) {
+                hour = "0" + hour;
+            }
+            var minutes = date.getMinutes();
+            if(minutes >= 0 && minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            var seconds = date.getSeconds();
+            if(seconds >= 0 && seconds < 10) {
+                seconds = "0" + seconds;
+            }
+            return date.getFullYear() + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
+        }
 
+    }
 </script>
 </body>
 </html>

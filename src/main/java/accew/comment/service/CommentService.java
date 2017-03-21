@@ -3,7 +3,9 @@ package accew.comment.service;
 import accew.comment.dao.CommentDao;
 import accew.comment.model.Comment;
 import accew.common.enums.CommentStatus;
+import accew.common.enums.CommentType;
 import accew.common.enums.IsYn;
+import accew.modules.pagger.PageListDTO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by acc on 2017/3/3.
@@ -71,6 +74,29 @@ public class CommentService {
         comment.setYn(IsYn.YES.getValue());
         comment.setStatus(CommentStatus.checked.getValue());
         return commentDao.selectList(comment);
+    }
+
+    public PageListDTO queryCheckedPage(Map map, long page, long pageSize){
+        PageListDTO<Comment> pageListDTO = new PageListDTO();
+        map.put("type", CommentType.theme.getValue());
+        map.put("yn", IsYn.YES.getValue());
+        map.put("status", CommentStatus.checked.getValue());
+        long totalRows = commentDao.queryForCount(map);
+        long pageCount = ((totalRows % pageSize) != 0) ? (totalRows / pageSize + 1) : (totalRows / pageSize);
+        if (page > pageCount && pageCount > 0) {
+            page = pageCount;
+        }
+
+        long startRow = pageSize * (page - 1);
+        map.put("startRow", startRow);
+        map.put("pageSize", pageSize);
+        List<Comment> commentList = commentDao.queryForList(map);
+        pageListDTO.setCurrentPage(page);
+        pageListDTO.setPageSize(pageSize);
+        pageListDTO.setPageCount(pageCount);
+        pageListDTO.setPageList(commentList);
+        pageListDTO.setTotalRows(totalRows);
+        return pageListDTO;
     }
 
     public List<Comment> queryPage(Comment comment, int pageNum, int pageSize){
