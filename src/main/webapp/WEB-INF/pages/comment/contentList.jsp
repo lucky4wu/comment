@@ -9,11 +9,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-    <title>匿名版</title>
+    <title>${title}</title>
     <%@ include file="/WEB-INF/pages/common/baseui.jsp" %>
 </head>
-<body>
-<div class="container-fluid">
+<body onresize="init()">
+<%@ include file="/WEB-INF/pages/common/top.jsp" %>
+<div class="container-fluid main-container">
     <div class="row">
         <div class="col-md-12">
             <input type="hidden" id="commentId" value="${id}"/>
@@ -52,6 +53,8 @@
 </div>
 <script type="text/javascript" >
     $(function(){
+        init();
+
         var html = "";
         html += "<tr><th class='col-md-2'></th><th class='col-md-10'></th></tr>";
         $.ajax({ url: "${ctx}/comment/getParentTitleAndContent/" + $('#commentId').val(),
@@ -95,5 +98,6 @@
         return  checkflag.comment;
     });
 </script>
+<%@include file="/WEB-INF/pages/common/googleAnalytics.jsp"%>
 </body>
 </html>

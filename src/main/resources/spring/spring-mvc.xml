@@ -52,5 +52,8 @@
         <bean class="accew.common.security.LoginInterceptor">
             <property name="include" value="/admin/**"></property>
         </bean>
+        <bean class="accew.common.security.CommentInterceptor">
+            <property name="include" value="/comment/**"></property>
+        </bean>
     </mvc:interceptors>
 </beans>

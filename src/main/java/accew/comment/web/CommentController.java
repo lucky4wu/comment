@@ -56,6 +56,7 @@ public class CommentController extends BaseController{
 
         saveUploadFile(request, c);
 
+        c.setComment(request.getAttribute("comment").toString());
         commentService.addComment(c);
 
         model.addAttribute("userNo", userNo);
@@ -130,6 +131,13 @@ public class CommentController extends BaseController{
     @RequestMapping("/contentList/{id}")
     public String redirectToContentList(@PathVariable Long id, HttpServletRequest request, Model model){
         model.addAttribute("id", id);
+
+        Comment comment = commentService.queryOneById(id);
+        if (comment != null){
+            model.addAttribute("title", comment.getTitle());
+        } else {
+            model.addAttribute("title", "匿名版");
+        }
 
         return "/comment/contentList";
     }

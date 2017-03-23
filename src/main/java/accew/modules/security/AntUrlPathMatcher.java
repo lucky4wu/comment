@@ -10,11 +10,24 @@ public class AntUrlPathMatcher implements UrlMatcher {
     private PathMatcher pathMatcher;
     private boolean requiresLowerCaseUrl;
 
-    public AntUrlPathMatcher() {
+    private static volatile AntUrlPathMatcher instance = null;
+
+    private AntUrlPathMatcher() {
         this(true);
     }
 
-    public AntUrlPathMatcher(boolean requiresLowerCaseUrl) {
+    public static AntUrlPathMatcher getInstance(){
+        if (instance == null){
+            synchronized(AntUrlPathMatcher.class){
+                if (instance == null){
+                    instance = new AntUrlPathMatcher();
+                }
+            }
+        }
+        return instance;
+    }
+
+    private AntUrlPathMatcher(boolean requiresLowerCaseUrl) {
         this.requiresLowerCaseUrl = true;
         this.pathMatcher = new AntPathMatcher();
 

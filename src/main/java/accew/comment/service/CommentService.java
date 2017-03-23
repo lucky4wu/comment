@@ -137,4 +137,18 @@ public class CommentService {
         comment.setYn("N");
         commentDao.updateByPrimaryKeySelective(comment);
     }
+
+    public Comment queryOneById(Long id) {
+        Comment comment = new Comment();
+        comment.setId(id);
+        comment.setType("03");
+        comment.setYn(IsYn.YES.getValue());
+        comment.setStatus(CommentStatus.checked.getValue());
+        List<Comment> commentList = commentDao.selectList(comment);
+        if (commentList != null && commentList.size() > 0){
+            return commentList.get(0);
+        }else {
+            return null;
+        }
+    }
 }

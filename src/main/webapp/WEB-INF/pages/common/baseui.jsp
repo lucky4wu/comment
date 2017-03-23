@@ -53,6 +53,19 @@
         }
 
     }
+
+    function init(){
+        var width = $(window).width();
+        if (width > 1024){
+            $('.main-container').attr("style", "width:1024px;");
+        }else {
+            $('.main-container').attr("style", "width:100%;");
+        }
+
+        var height = $('nav').height();
+        var style = $('.main-container').attr("style");
+        $('.main-container').attr("style", "margin-top:"+height+"px;"+style);
+    }
 </script>
 </body>
 </html>

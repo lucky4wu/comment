@@ -12,34 +12,10 @@
     <title>Easy Way 旅游</title>
     <%@ include file="/WEB-INF/pages/common/baseui.jsp" %>
 </head>
-<body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="navbar-text">Easy Way 旅游，欢迎灌水！</p>
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group " >
-                        <input type="text" name="title" class="form-control" id="searchTitleTxt" placeholder="搜索..."/>
-                        <button id="searchTitleBtn" type="button" class="btn btn-default" style="border-color: #ffffff;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</nav>
-<div class="container-fluid" id="container">
-    <div class="row">
-        <div class="col-md-12">
-            <p class="navbar-text"></p>
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group " >
-                    <input type="text" name="comment" class="form-control" />
-                    <button type="button" class="btn btn-default" style="border-color: #ffffff;"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                </div>
-            </form>
-        </div>
-    </div>
+<body onresize="init()">
+<%@ include file="/WEB-INF/pages/common/top.jsp" %>
+<div class="container-fluid main-container" >
+
     <div class="row">
         <div class="col-md-12" >
             <table class="table table-hover" id="ajaxListPage" >
@@ -102,23 +78,28 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table">
-                <tr class="col-xs-4">
-                    <th>联系方式（微信号）:</th>
-                    <td>994665236</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
             <div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="width: 35%">
                     正在施工
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <tr class="col-xs-12 col-md-6">
+                    <th>客服小A:</th>
+                    <td><img src="${ctx}/static/image/my_wechat.jpg" alt="微信二维码" style="width: 320px;height: 420px;"/></td>
+                </tr>
+                <tr class="col-xs-12 col-md-6">
+                    <th>客服小伟（微信号）:</th>
+                    <td>994665236</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
 
 </div>
 
@@ -141,18 +122,6 @@
 
     });
 
-   function init(){
-       var width = $(window).width();
-       if (width > 1024){
-           $('#container').attr("style", "width:1024px;");
-       }else {
-           $('#container').attr("style", "width:100%;");
-       }
-   }
-
-   $("#searchTitleBtn").click(function () {
-       searchListPgae(1);
-   });
 
    function searchListPgae(curPage) {
        var html = "";
@@ -171,7 +140,7 @@
            success: function(data){
                $.each(data.pageList, function (i, item) {
                    html += "<tr>";
-                   html += "<td><a href='${ctx}/comment/contentList/"+ item.id + "' target='_blank' >" + item.title + "</a>";
+                   html += "<td><a href='${ctx}/comment/contentList/"+ item.id + "' >" + item.title + "</a>";
                    if (item.imageUrl != '' && item.imageUrl != undefined){
                        html += "<img src='${ctx}"+ item.imageUrl+"' alt='留言图片' class='img-responsive' />";
                    }
@@ -232,6 +201,7 @@
         return  checkflag.title && checkflag.comment;
     });
 </script>
+<%@include file="/WEB-INF/pages/common/googleAnalytics.jsp"%>
 <%@ include file="/WEB-INF/pages/common/footer.jsp" %>
 </body>
 </html>

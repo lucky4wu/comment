@@ -7,5 +7,6 @@
 </head>
 <body>
 <p>留言成功！天了噜！</p>
+<%@include file="/WEB-INF/pages/common/googleAnalytics.jsp"%>
 </body>
 </html>
