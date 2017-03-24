@@ -181,7 +181,7 @@
 
    var checkflag = {"title":false, "comment":false};
    $("#txtTitle").blur(function () {
-       if ($("#txtTitle").val() == ""){
+       if ($("#txtTitle").val() == "" || $("#txtTitle").val().length > 150){
             checkflag.title = false;
        }else {
            checkflag.title = true;
@@ -189,7 +189,7 @@
    });
 
    $("#txtComment").blur(function () {
-       if ($("#txtComment").val() == ""){
+       if ($("#txtComment").val() == "" || $("#txtComment").val().length > 1000){
            checkflag.comment = false;
        }else {
            checkflag.comment = true;
