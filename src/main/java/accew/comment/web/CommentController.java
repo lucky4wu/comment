@@ -103,6 +103,7 @@ public class CommentController extends BaseController{
     public String replyContent(@PathVariable Long id, Comment comment, HttpServletRequest request, HttpServletResponse response, Model model){
         String userNo = getUserNo(request, response);
         comment.setId(id);
+        comment.setComment(request.getAttribute("comment").toString());
 
         saveUploadFile(request, comment);
 
