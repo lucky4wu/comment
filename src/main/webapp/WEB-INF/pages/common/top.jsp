@@ -17,9 +17,9 @@
             </div>
 
             <div class="col-md-5 col-sm-5 col-xs-8">
-                <ul class="nav navbar-nav nav-pills">
-                    <li class="active"><a href="${ctx}/">首页 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">待续</a></li>
+                <ul id="main-menu" class="nav navbar-nav nav-pills">
+                    <li class="active"><a href="${ctx}/">首页<span class="sr-only">(current)</span></a></li>
+                    <li><a href="${ctx}/order/orderForm">198起</a></li>
                 </ul>
             </div>
 
