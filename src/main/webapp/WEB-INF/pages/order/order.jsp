@@ -27,19 +27,19 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="${ctx}/static/image/摩天轮.jpg" alt="摩天轮" style="height: 450px;width: 1024px;">
+                    <img src="${ctx}/static/image/motianlun.jpg" alt="摩天轮" style="height: 450px;width: 1024px;">
                     <div class="carousel-caption">
                         摩天轮
                     </div>
                 </div>
                 <div class="item">
-                    <img src="${ctx}/static/image/清水寺.jpg" alt="清水寺" style="height: 450px;width: 1024px;">
+                    <img src="${ctx}/static/image/qingshuisi.jpg" alt="清水寺" style="height: 450px;width: 1024px;">
                     <div class="carousel-caption">
                         清水寺
                     </div>
                 </div>
                 <div class="item">
-                    <img src="${ctx}/static/image/奈良公园.jpg" alt="奈良公园" style="height: 450px;width: 1024px;">
+                    <img src="${ctx}/static/image/nailianggongyuan.jpg" alt="奈良公园" style="height: 450px;width: 1024px;">
                     <div class="carousel-caption">
                         奈良公园
                     </div>
