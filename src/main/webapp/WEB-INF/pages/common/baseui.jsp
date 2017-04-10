@@ -69,4 +69,5 @@
     }
 </script>
 </body>
+<%@ include file="/WEB-INF/pages/common/googleAnalytics.jsp" %>
 </html>

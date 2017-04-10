@@ -98,6 +98,5 @@
         return  checkflag.comment;
     });
 </script>
-<%@include file="/WEB-INF/pages/common/googleAnalytics.jsp"%>
 </body>
 </html>

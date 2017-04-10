@@ -79,7 +79,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="width: 35%">
+                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
                     正在施工
                 </div>
             </div>
@@ -201,7 +201,6 @@
         return  checkflag.title && checkflag.comment;
     });
 </script>
-<%@include file="/WEB-INF/pages/common/googleAnalytics.jsp"%>
 <%@ include file="/WEB-INF/pages/common/footer.jsp" %>
 </body>
 </html>
