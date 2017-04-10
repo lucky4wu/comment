@@ -23,6 +23,7 @@
 <%--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>--%>
 <script type="text/javascript" src="${ctx}/static/js/jquery.1.12.4.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/iscroll.js"></script>
 
 <script type="text/javascript">
     function formatterdate(val, row) {
