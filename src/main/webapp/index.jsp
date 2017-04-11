@@ -12,11 +12,16 @@
     <title>Easy Way 旅游</title>
     <%@ include file="/WEB-INF/pages/common/baseui.jsp" %>
 </head>
-<body onresize="init()">
+<body onresize="init()" onload="loaded()">
 <%@ include file="/WEB-INF/pages/common/top.jsp" %>
-<div class="container-fluid main-container" >
+
+<div class="container-fluid main-container" id="wrapper">
 
     <div class="row">
+        <div class="col-md-12">
+            <p id="pullDownContinue" style="display: none;" class="text-center">继续下拉可刷新</p>
+            <p id="pullDownRelease" style="display: none;" class="text-center">松开即可刷新</p>
+        </div>
         <div class="col-md-12" >
             <table class="table table-hover" id="ajaxListPage" >
 
@@ -122,10 +127,50 @@
 
     });
 
+    var myScroll;
+    function loaded() {
+        var height = -80;
+        var touchY = 60;
+        myScroll = new IScroll('#wrapper', {
+            probeType: 1,
+            bounce: true,
+            preventDefault:false
+        });
+
+        myScroll.on('scrollEnd', function () {
+            var scrollTop = $(document).scrollTop();
+            if (this.distY > touchY && scrollTop <= height){
+                setTimeout('pullDownRefresh()',2000);
+            }
+            $('#pullDownContinue').hide();
+            myScroll.refresh();
+        });
+
+        myScroll.on('scroll', function () {
+            var scrollTop = $(document).scrollTop();
+            if (scrollTop > height && scrollTop < 0 ){
+                $('#pullDownContinue').show();
+            }
+            if (scrollTop <= height){
+                $('#pullDownContinue').hide();
+                $('#pullDownRelease').show();
+            }
+            if (scrollTop == 0){
+                $('#pullDownRelease').hide();
+            }
+        });
+        document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
+    }
+
+    function pullDownRefresh(){
+        $('#pullDownRelease').hide();
+        searchListPgae(1);
+    }
+
 
    function searchListPgae(curPage) {
        var html = "";
-       html += "<tr><th class='col-md-10'></th><th class='col-md-2'></th></tr>";
+       html += "<tr><th class='col-md-12'></th></tr>";
        var pageHtml = "";
 
        $.ajax({ url: "${ctx}/comment/listPage",
@@ -140,14 +185,18 @@
            success: function(data){
                $.each(data.pageList, function (i, item) {
                    html += "<tr>";
-                   html += "<td><a href='${ctx}/comment/contentList/"+ item.id + "' >" + item.title + "</a>";
+                   html += "<td><div class='col-md-12'><a href='${ctx}/comment/contentList/"+ item.id + "' >" + item.title + "</a></div>";
                    if (item.imageUrl != '' && item.imageUrl != undefined){
+                       html += "<div class='col-md-4 col-xs-12'>";
+                       html += "<a href='${ctx}"+ item.imageUrl+"' class='thumbnail' >";
                        html += "<img src='${ctx}"+ item.imageUrl+"' alt='留言图片' class='img-responsive' />";
+                       html += "</a></div>";
+                       html += "<div class='col-md-8 col-xs-12'>" + convertStrTo200(item.comment) + "</div>";
                    }
-                   html += "</td>";
-                   html += "<td><h5><small>" + item.createUser + "</small></h5>";
-                   html += "<h6><small>" + date2str(item.createTime) + "</small></h6></td>";
-                   html += "</tr>";
+                   html += "<div class='col-md-12 col-xs-12'>" + convertStrTo200(item.comment) + "</div>";
+                   html += "<div class='col-md-12'><h6><small>" + item.createUser + "</small>&nbsp;";
+                   html += "<small>" + date2str(item.createTime) + "</small></h6></div>";
+                   html += "</td></tr>";
                });
 
                $("#ajaxListPage").html(html);
@@ -200,6 +249,8 @@
         $("#txtComment").blur();
         return  checkflag.title && checkflag.comment;
     });
+
+
 </script>
 <%@ include file="/WEB-INF/pages/common/footer.jsp" %>
 </body>

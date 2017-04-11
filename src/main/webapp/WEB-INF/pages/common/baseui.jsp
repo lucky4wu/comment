@@ -23,7 +23,7 @@
 <%--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>--%>
 <script type="text/javascript" src="${ctx}/static/js/jquery.1.12.4.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${ctx}/static/js/iscroll.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/iscroll-probe.js"></script>
 
 <script type="text/javascript">
     function formatterdate(val, row) {
@@ -59,13 +59,23 @@
         var width = $(window).width();
         if (width > 1024){
             $('.main-container').attr("style", "width:1024px;");
-        }else {
+        } else {
             $('.main-container').attr("style", "width:100%;");
         }
 
         var height = $('nav').height();
         var style = $('.main-container').attr("style");
         $('.main-container').attr("style", "margin-top:"+height+"px;"+style);
+    }
+
+    function convertStrTo200(str) {
+        var reStr = '';
+        if (str.length > 200){
+            reStr += str.substr(0,200) + "...";
+        }else {
+            reStr += str.substr(0,200);
+        }
+        return reStr;
     }
 </script>
 </body>

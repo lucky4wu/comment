@@ -12,19 +12,16 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-4">
-                <p class="navbar-text">Easy Way 旅游</p>
-            </div>
-
-            <div class="col-md-5 col-sm-5 col-xs-8">
+            <div class="col-md-7 col-sm-7 col-xs-12">
                 <ul id="main-menu" class="nav navbar-nav nav-pills">
-                    <li class="active"><a href="${ctx}/">首页<span class="sr-only">(current)</span></a></li>
+                    <li><a href="${ctx}/">Easy Way 旅游<span class="sr-only">(current)</span></a></li>
                     <li><a href="${ctx}/order/orderForm">198起</a></li>
                 </ul>
             </div>
 
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-md-5 col-sm-5 col-xs-12">
                 <form class="navbar-form navbar-right form-inline" role="search">
+                    <input type="text" style="display:none"/>
                     <div class="form-group">
                         <label class="sr-only" for="searchTitleTxt">Search</label>
                         <div class="input-group " >
