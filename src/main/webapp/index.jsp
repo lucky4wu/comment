@@ -192,8 +192,9 @@
                        html += "<img src='${ctx}"+ item.imageUrl+"' alt='留言图片' class='img-responsive' />";
                        html += "</a></div>";
                        html += "<div class='col-md-8 col-xs-12'>" + convertStrTo200(item.comment) + "</div>";
+                   }else{
+                       html += "<div class='col-md-12 col-xs-12'>" + convertStrTo200(item.comment) + "</div>";
                    }
-                   html += "<div class='col-md-12 col-xs-12'>" + convertStrTo200(item.comment) + "</div>";
                    html += "<div class='col-md-12'><h6><small>" + item.createUser + "</small>&nbsp;";
                    html += "<small>" + date2str(item.createTime) + "</small></h6></div>";
                    html += "</td></tr>";
