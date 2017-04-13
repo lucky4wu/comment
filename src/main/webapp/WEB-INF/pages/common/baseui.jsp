@@ -16,7 +16,7 @@
     <%--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
     <link rel="stylesheet" href="${ctx}/static/css/bootstrap.min.css"/>
     <%--<link rel="stylesheet" href="${ctx}/static/css/bootstrap-theme.min.css"/>--%>
-
+    <link rel="stylesheet" href="${ctx}/static/css/jstree/style.min.css"/>
 </head>
 <body>
 <%--<script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>--%>
@@ -24,6 +24,7 @@
 <script type="text/javascript" src="${ctx}/static/js/jquery.1.12.4.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/js/iscroll-probe.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/jstree.min.js"></script>
 
 <script type="text/javascript">
     function formatterdate(val, row) {

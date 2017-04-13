@@ -105,12 +105,16 @@
         </div>
     </div>
 
+    <div id="using_json_2">
+
+    </div>
 
 </div>
 
 
 <script type="text/javascript" >
-    var pageSize = 30;
+
+    var pageSize = 20;
    $(function(){
        init();
 
@@ -127,6 +131,7 @@
 
     });
 
+   //*********屏幕滚动刷新begin**********
     var myScroll;
     function loaded() {
         var height = -80;
@@ -166,6 +171,7 @@
         $('#pullDownRelease').hide();
         searchListPgae(1);
     }
+    //*********屏幕滚动刷新end**********
 
 
    function searchListPgae(curPage) {
@@ -183,6 +189,7 @@
                "pageSize":pageSize
             },
            success: function(data){
+               var treeArr = new Array();
                $.each(data.pageList, function (i, item) {
                    html += "<tr>";
                    html += "<td><div class='col-md-12'><a href='${ctx}/comment/contentList/"+ item.id + "' >" + item.title + "</a></div>";
@@ -198,6 +205,13 @@
                    html += "<div class='col-md-12'><h6><small>" + item.createUser + "</small>&nbsp;";
                    html += "<small>" + date2str(item.createTime) + "</small></h6></div>";
                    html += "</td></tr>";
+                   treeArr[i] = { "id" : item.id+"", "parent" : "#", "text" : text };
+               });
+
+               $('#using_json_2').jstree({ 'core' : {
+                   'data' : treeArr
+               },
+                   "plugins" : [ "wholerow" ]
                });
 
                $("#ajaxListPage").html(html);
